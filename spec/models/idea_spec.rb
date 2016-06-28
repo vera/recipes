@@ -1,13 +1,13 @@
 require "rails_helper"
 
 describe Idea do
-  it "has a title" do
+  it "has a name" do
     idea = Idea.new
     idea.name = ''
     expect(idea.valid?).to eq(false)
   end
 
-  it "has a unique title" do
+  it "has a unique name" do
     idea1 = Idea.new
     idea2 = Idea.new
     idea1.name = 'Test'
@@ -16,7 +16,7 @@ describe Idea do
     expect(idea1).not_to be_valid
   end
 
-  it "has a unique constraint on title" do
+  it "has a unique constraint on name" do
     idea1 = Idea.new
     idea2 = Idea.new
     idea1.name = 'Test'
