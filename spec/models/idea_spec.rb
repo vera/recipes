@@ -1,27 +1,19 @@
 require "rails_helper"
 
 describe Idea do
-  it "has a name" do
-    idea = Idea.new
-    idea.name = ''
-    expect(idea.valid?).to eq(false)
+  context 'without a name' do
+    subject { Idea.new(name: '')          }
+    it      { is_expected.not_to be_valid }
   end
 
-  it "has a unique name" do
-    idea1 = Idea.new
-    idea2 = Idea.new
-    idea1.name = 'Test'
-    idea2.name = 'Test'
-    idea2.save
-    expect(idea1).not_to be_valid
-  end
+  context 'with a duplicate name' do
+    before  { Idea.new(name: 'Test').save! }
+    subject { Idea.new(name: 'Test')       }
+    it      { is_expected.not_to be_valid  }
 
-  it "has a unique constraint on name" do
-    idea1 = Idea.new
-    idea2 = Idea.new
-    idea1.name = 'Test'
-    idea2.name = 'Test'
-    idea2.save
-    expect{idea1.save(:validate => false)}.to raise_error ActiveRecord::RecordNotUnique
+    context 'bypassing validations' do
+      subject { Idea.new(name: 'Test').save(validate: false)                   }
+      it      { expect{ subject }.to raise_error ActiveRecord::RecordNotUnique }
+    end
   end
 end
