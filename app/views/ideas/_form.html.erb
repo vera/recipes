@@ -20,6 +20,10 @@
     <%= f.text_area :description %>
   </div>
   <div class="field">
+    <%= f.label :category %><br>
+    <%= f.select :category_id, Category.all.map{ |c| [ c.name, c.id ] } %>
+  </div>
+  <div class="field">
     <%= f.label :picture %><br>
     <%= f.file_field :picture %>
   </div>
