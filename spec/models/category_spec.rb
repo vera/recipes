@@ -1,5 +1,6 @@
 require 'rails_helper'
+require 'support/shared_examples/unique_and_present_name'
 
 RSpec.describe Category, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it_behaves_like 'a model with unique and present name'
 end
