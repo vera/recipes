@@ -18,9 +18,9 @@
       <tr>
         <td style="width: 70px;">
           <% if idea.picture? %>
-            <%= image_tag(idea.picture, :width => "50px", :height => "50px") %>
+             <%= image_tag idea.picture.thumb, :class => "thumb" %>
           <% else %>
-             <%= image_tag "no_picture.png" %>
+             <%= image_tag "no_picture.png", :class => "thumb" %>
           <% end %>
         </td>
         <td><%= idea.name %></td>
