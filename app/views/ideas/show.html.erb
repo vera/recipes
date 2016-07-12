@@ -1,24 +1,32 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @idea.name %>
-</p>
+<table>
+  <tr>
+    <th class="th_vert">Name:</th>
+    <td><%= @idea.name %></td>
+  </tr>
 
-<p>
-  <strong>Description:</strong>
-  <%= @idea.description %>
-</p>
+  <tr>
+    <th class="th_vert">Category:</th>
+    <td><%= @idea.category.name %></td>
+  </tr>
 
-<p>
-  <strong>Category:</strong>
-  <%= @idea.category.name %>
-</p>
+  <tr>
+    <th class="th_vert">Description:</th>
+    <td><%= @idea.description %></td>
+  </tr>
 
-<p>
-  <strong>Picture:</strong>
-  <%= image_tag(@idea.picture_url, :width => 600) if @idea.picture.present? %>
-</p>
+  <% if @idea.picture? %>
+    <tr>
+      <th colspan="2">Picture:</th>
+    </tr>
+    <tr>
+      <td colspan="2"><%= image_tag(@idea.picture_url, :width => 600) %></td>
+    </tr>
+  <% end %>
+</table>
+
+<br>
 
 <%= link_to 'Edit', edit_idea_path(@idea) %> |
 <%= link_to 'Back', ideas_path %>

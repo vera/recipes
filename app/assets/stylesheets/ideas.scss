@@ -2,10 +2,18 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+table {
+  width: 100%;
+}
+
 th,td {
   width: 200px;
 }
 
 .thumb {
   border: 1px solid #ddd;
+}
+
+.th_vert {
+  width: 50%;
 }
