@@ -15,6 +15,8 @@
  */
 
 body { padding-top: 100px; }
-footer { margin-top: 100px; }
+footer { margin-top: 100px; position: absolute; bottom: 10px; text-align: right; width: 100%; }
 table, td, th { vertical-align: middle; border: none; }
 th { border-bottom: 1px solid #DDD; }
+a:hover {background: none; color: black; }
+.button { width: 20px; }

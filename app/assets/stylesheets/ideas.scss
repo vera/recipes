@@ -8,12 +8,19 @@ table {
 
 th,td {
   width: 200px;
+  padding: 5px;
 }
 
 .thumb {
   border: 1px solid #ddd;
+  width: 40px;
+  height: 40px;
 }
 
 .th_vert {
   width: 50%;
+  border-bottom: 0px;
+  border-right: 1px solid #ddd;
 }
+
+.button { width: 20px; }

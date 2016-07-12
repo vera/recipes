@@ -3,7 +3,7 @@
 <table>
   <thead>
     <tr>
-      <td style="width: 70px;"></td>
+      <td style="width: 50px;"></td>
       <th>Name</th>
       <th>Category</th>
       <th>Description</th>
@@ -14,19 +14,19 @@
   <tbody>
     <% @ideas.each do |idea| %>
       <tr>
-        <td style="width: 70px;">
+        <td style="width: 50px;">
           <% if idea.picture? %>
              <%= image_tag idea.picture.thumb, :class => "thumb" %>
           <% else %>
              <%= image_tag "no_picture.png", :class => "thumb" %>
           <% end %>
         </td>
-        <td><%= idea.name %></td>
-        <td><%= idea.category.name %></td>
-        <td><%= idea.description %></td>
-        <td><%= link_to 'Show', idea %></td>
-        <td><%= link_to 'Edit', edit_idea_path(idea) %></td>
-        <td><%= link_to 'Destroy', idea, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td style="width: 15%"><%= idea.name %></td>
+        <td style="width: 15%"><%= idea.category.name %></td>
+        <td style="width: 70%"><%= idea.description.truncate_words(15) %></td>
+        <td class="button"><%= link_to (image_tag "show.png"), idea %></td>
+        <td class="button"><%= link_to (image_tag "edit.png"), edit_idea_path(idea) %></td>
+        <td class="button"><%= link_to (image_tag "delete.png"), idea, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
