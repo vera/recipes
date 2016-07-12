@@ -44,6 +44,7 @@ group :development, :test do
   gem 'byebug'
   # Use RSpec for writing tests
   gem 'rspec-rails', '~> 3.4'
+  gem 'capybara', '~> 2.7', '>= 2.7.1'
 end
 
 group :development do
