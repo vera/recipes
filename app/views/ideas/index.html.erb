@@ -1,36 +1,46 @@
 <p id="notice"><%= notice %></p>
+<% @ideas.group_by(&:category).each do |category, ideas| %>
 
-<table>
-  <thead>
-    <tr>
-      <td style="width: 50px;"></td>
-      <th>Name</th>
-      <th>Category</th>
-      <th>Description</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+  <div class="category">
 
-  <tbody>
-    <% @ideas.each do |idea| %>
-      <tr>
-        <td style="width: 50px;">
-          <% if idea.picture? %>
-             <%= image_tag idea.picture.thumb, :class => "thumb" %>
-          <% else %>
-             <%= image_tag "no_picture.png", :class => "thumb" %>
-          <% end %>
-        </td>
-        <td style="width: 15%"><%= idea.name %></td>
-        <td style="width: 15%"><%= idea.category.name %></td>
-        <td style="width: 70%"><%= idea.description.truncate_words(15) %></td>
-        <td class="button"><%= link_to (image_tag "show.png"), idea %></td>
-        <td class="button"><%= link_to (image_tag "edit.png"), edit_idea_path(idea) %></td>
-        <td class="button"><%= link_to (image_tag "delete.png"), idea, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+    <table>
+
+      <thead>
+        <tr>
+          <th class="cat" colspan="6"><%= category.name %></th>
+        </tr>
+
+        <tr>
+          <td style="width: 50px;"></td>
+          <th>Name</th>
+          <th>Description</th>
+          <th colspan="3"></th>
+        </tr>
+      </thead>
+      <tbody>
+
+      <% ideas.each do |idea| %>
+        <tr>
+          <td style="width: 50px;">
+            <% if idea.picture? %>
+               <%= image_tag idea.picture.thumb, :class => "thumb" %>
+            <% else %>
+               <%= image_tag "no_picture.png", :class => "thumb" %>
+            <% end %>
+          </td>
+          <td style="width: 15%"><%= idea.name %></td>
+          <td style="width: 70%"><% if idea.description? %><%= idea.description.truncate_words(15) %><% else %><%= "Keine Beschreibung vorhanden" %><% end %></td>
+          <td class="button"><%= link_to (image_tag "show.png"), idea %></td>
+          <td class="button"><%= link_to (image_tag "edit.png"), edit_idea_path(idea) %></td>
+          <td class="button"><%= link_to (image_tag "delete.png"), idea, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+
+      </tbody>
+    </table>
+    <hr>
+  </div>
+<% end %>
 
 <br>
 

@@ -4,11 +4,14 @@ feature "Group ideas by category", :type => :feature do
   let(:category1) { create :category, name: "Wow much category" }
   let(:category2) { create :category }
 
-  given "given 3 ideas and 2 categories"  do
+  # 'given' doesn't work for me?
+  # given "given 3 ideas and 2 categories"  do
+  before {
     create :idea, category: category1, name: "Very Idea"
     create :idea, category: category2, name: "So much other category"
     create :idea, category: category1, name: "Idea Wow"
-  end
+  }
+  # end
 
   scenario "See categorized ideas" do
     visit "/ideas"
