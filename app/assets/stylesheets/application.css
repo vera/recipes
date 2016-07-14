@@ -20,3 +20,31 @@ table, td, th { vertical-align: middle; border: none; }
 th { border-bottom: 1px solid #DDD; }
 a:hover {background: none; color: black; }
 .button { width: 20px; }
+
+.navbar, .navbar-fixed-top, .navbar-default {
+  background: #ffad97;
+  border-bottom: 3px solid #eee;
+}
+
+input, textarea, select {
+  background: #eee;
+  border: 6px solid #eee;
+  width: 400px;
+}
+
+textarea {
+  height: 250px;
+}
+
+th .cat { margin-bottom: 20px; }
+
+.button .glyphicon {
+  font-size: 18px;
+  color: #bbb;
+}
+
+.glyphicon {
+  line-height: 1;
+  padding-left: 3px;
+  font-size: 10px;
+}

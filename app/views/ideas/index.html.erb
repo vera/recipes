@@ -30,9 +30,9 @@
           </td>
           <td style="width: 15%"><%= idea.name %></td>
           <td style="width: 70%"><% if idea.description? %><%= idea.description.truncate_words(15) %><% else %><%= "Keine Beschreibung vorhanden" %><% end %></td>
-          <td class="button"><%= link_to (image_tag "show.png"), idea %></td>
-          <td class="button"><%= link_to (image_tag "edit.png"), edit_idea_path(idea) %></td>
-          <td class="button"><%= link_to (image_tag "delete.png"), idea, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <td class="button"><%= link_to idea do %><span class="glyphicon glyphicon-eye-open"></span><% end %></td>
+          <td class="button"><%= link_to edit_idea_path(idea) do %><span class="glyphicon glyphicon-pencil"></span><% end %></td>
+          <td class="button"><%= link_to idea, method: :delete, data: { confirm: 'Are you sure?' } do %><span class="glyphicon glyphicon-remove-circle"></span><% end %></td>
         </tr>
       <% end %>
 
