@@ -41,6 +41,27 @@
     <hr>
   </div>
 <% end %>
+<% @empty_categories.each do |category| %>
+
+<table>
+
+    <thead>
+      <tr>
+        <th class="cat" colspan="6"><%= category.name %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td colspan="7">
+          No ideas in this category.
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <hr>
+
+<% end %>
 
 <br>
 

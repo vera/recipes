@@ -5,6 +5,7 @@ class IdeasController < ApplicationController
   # GET /ideas.json
   def index
     @ideas = Idea.all
+    @empty_categories = Category.where('id NOT IN (?)', Idea.select("category_id"))
   end
 
   # GET /ideas/1
