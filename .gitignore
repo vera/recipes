@@ -18,3 +18,5 @@
 
 # Ignore uploads
 /public/uploads
+
+.byebug_history
