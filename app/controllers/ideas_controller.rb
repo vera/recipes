@@ -6,7 +6,6 @@ class IdeasController < ApplicationController
   def index
     @category = Category.find(params[:category_id])
     @ideas = Idea.where("category_id = ?", params[:category_id])
-    @empty_categories = Category.where('id NOT IN (?)', Idea.select("category_id"))
   end
 
   # GET /ideas/1
