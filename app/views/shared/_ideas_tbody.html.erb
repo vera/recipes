@@ -1,0 +1,30 @@
+<% unless ideas.empty? %>
+
+      <tbody>
+        <% ideas.each do |idea| %>
+          <tr>
+            <td style="width: 50px;">
+              <% if idea.picture? %>
+                 <%= image_tag idea.picture.thumb, :class => "thumb" %>
+              <% else %>
+                 <%= image_tag "no_picture.png", :class => "thumb" %>
+              <% end %>
+            </td>
+            <td style="width: 15%"><%= idea.name %></td>
+            <td style="width: 65%"><% if idea.description? %><%= idea.description.truncate_words(15) %><% else %><%= "No description available" %><% end %></td>
+            <td class="button"><%= link_to idea do %><span class="glyphicon glyphicon-eye-open"></span><% end %></td>
+            <td class="button"><%= link_to edit_idea_path(idea) do %><span class="glyphicon glyphicon-pencil"></span><% end %></td>
+            <td class="button"><%= link_to idea, method: :delete, data: { confirm: 'Are you sure?' } do %><span class="glyphicon glyphicon-remove-circle"></span><% end %></td>
+          </tr>
+        <% end %>
+      </tbody>
+
+    <% else %>
+
+      <tbody>
+        <tr>
+          <td style="height: 50px;" colspan="2">No ideas in this category.</td>
+        </tr>
+      </tbody>
+
+<% end %>

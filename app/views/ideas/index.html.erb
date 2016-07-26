@@ -1,57 +1,11 @@
 <p id="notice"><%= notice %></p>
 <div class="category">
-
-    <table class="table-hover">
-
-
-
-
-      <% unless @ideas.empty? %>
-      <thead>
-        <%= render partial: "shared/category_header", locals: {category: @category, colspan: 5} %>
-
-        <tr>
-          <th style="width: 50px;"></th>
-          <th>Name</th>
-          <th>Description</th>
-          <th colspan="3"></th>
-        </tr>
-      </thead>
-      <tbody>
-      <% @ideas.each do |idea| %>
-        <tr>
-          <td style="width: 50px;">
-            <% if idea.picture? %>
-               <%= image_tag idea.picture.thumb, :class => "thumb" %>
-            <% else %>
-               <%= image_tag "no_picture.png", :class => "thumb" %>
-            <% end %>
-          </td>
-          <td style="width: 15%"><%= idea.name %></td>
-          <td style="width: 65%"><% if idea.description? %><%= idea.description.truncate_words(15) %><% else %><%= "Keine Beschreibung vorhanden" %><% end %></td>
-          <td class="button"><%= link_to idea do %><span class="glyphicon glyphicon-eye-open"></span><% end %></td>
-          <td class="button"><%= link_to edit_idea_path(idea) do %><span class="glyphicon glyphicon-pencil"></span><% end %></td>
-          <td class="button"><%= link_to idea, method: :delete, data: { confirm: 'Are you sure?' } do %><span class="glyphicon glyphicon-remove-circle"></span><% end %></td>
-        </tr>
-      </tbody>
-      <% end
-      else %>
-      <thead>
-        <%= render partial: "shared/category_header", locals: {category: @category, colspan: 1} %>
-      </thead>
-      <tbody>
-
-      <tr>
-        <td>No ideas in this category.</td>
-      </tr>
-      </tbody>
-      <%
-      end %>
-
-
-    </table>
-    <hr>
-  </div>
+  <table class="table-hover sortable">
+    <%= render partial: "shared/category_header", locals: {category: @category, empty: @ideas.empty?} %>
+    <%= render partial: 'shared/ideas_tbody', locals: {ideas: @ideas} %>
+  </table>
+  <hr>
+</div>
 
 <br>
 

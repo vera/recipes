@@ -1,9 +1,19 @@
-<tr>
-  <th class="cat" colspan="<%= colspan %>">
-    <%= link_to category.name, category_ideas_path(category) %>
-  </th>
-  <th class="cat button-s right">
-    <%= link_to new_category_idea_path(category) do %><span class="glyphicon glyphicon-plus"></span><% end %>
-    <%= link_to category, method: :delete, data: { confirm: 'Are you sure?' } do %><span class="glyphicon glyphicon-remove"></span><% end %>
-  </th>
-</tr>
+<thead>
+  <tr>
+    <th class="cat" colspan="<%= empty ? '1' : '5' %>" data-defaultsort='disabled'>
+      <%= link_to category.name, category_ideas_path(category) %>
+    </th>
+    <th class="cat button-s right" data-defaultsort='disabled'>
+      <%= link_to new_category_idea_path(category) do %><span class="glyphicon glyphicon-plus"></span><% end %>
+      <%= link_to category, method: :delete, data: { confirm: 'Are you sure?' } do %><span class="glyphicon glyphicon-remove"></span><% end %>
+    </th>
+  </tr>
+  <% if !empty %>
+  <tr>
+    <th style="width: 50px;" data-defaultsort='disabled'></th>
+    <th>Name</th>
+    <th>Description</th>
+    <th colspan="3" data-defaultsort='disabled'></th>
+  </tr>
+  <% end %>
+</thead>
