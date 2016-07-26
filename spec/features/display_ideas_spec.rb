@@ -7,7 +7,7 @@ feature "Display ideas", :type => :feature do
   before { create :idea, category: category }
 
   scenario "See ideas" do
-    visit "/ideas"
+    visit '/categories'
     save_and_open_page
 
     expect(page).to have_content("Testidee")

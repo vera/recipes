@@ -1,0 +1,9 @@
+<tr>
+  <th class="cat" colspan="<%= colspan %>">
+    <%= link_to category.name, category_ideas_path(category) %>
+  </th>
+  <th class="cat button-s right">
+    <%= link_to new_category_idea_path(category, idea) do %><span class="glyphicon glyphicon-plus"></span><% end %>
+    <%= link_to category, method: :delete, data: { confirm: 'Are you sure?' } do %><span class="glyphicon glyphicon-remove"></span><% end %>
+  </th>
+</tr>

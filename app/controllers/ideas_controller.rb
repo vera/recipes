@@ -4,7 +4,8 @@ class IdeasController < ApplicationController
   # GET /ideas
   # GET /ideas.json
   def index
-    @ideas = Idea.all
+    @category = Category.find(params[:category_id])
+    @ideas = Idea.where("category_id = ?", params[:category_id])
     @empty_categories = Category.where('id NOT IN (?)', Idea.select("category_id"))
   end
 
@@ -15,7 +16,8 @@ class IdeasController < ApplicationController
 
   # GET /ideas/new
   def new
-    @idea = Idea.new
+    @category = Category.find(params[:category_id])
+    @idea = @category.idea.build
   end
 
   # GET /ideas/1/edit
@@ -57,7 +59,7 @@ class IdeasController < ApplicationController
   def destroy
     @idea.destroy
     respond_to do |format|
-      format.html { redirect_to ideas_url, notice: 'Idea was successfully destroyed.' }
+      format.html { redirect_to root_path, notice: 'Idea was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

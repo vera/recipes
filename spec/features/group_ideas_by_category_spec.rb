@@ -14,7 +14,7 @@ feature "Group ideas by category", :type => :feature do
   # end
 
   scenario "See categorized ideas" do
-    visit "/ideas"
+    visit '/categories'
 
     grouping_element = find('.category', :text => /Wow much category/)
     within(grouping_element) do

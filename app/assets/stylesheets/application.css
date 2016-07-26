@@ -12,7 +12,7 @@
  *
  *= require_tree .
  *= require_self
- */
+*/
 
 body { padding-top: 100px; }
 footer { margin-top: 100px; position: absolute; bottom: 10px; text-align: right; width: 100%; }
@@ -36,15 +36,42 @@ textarea {
   height: 250px;
 }
 
-th .cat { margin-bottom: 20px; }
+th .cat {
+  margin-bottom: 20px;
+}
+
+.button, .button-s {
+  width: 35px;
+}
 
 .button .glyphicon {
   font-size: 18px;
-  color: #bbb;
+  color: #ccc;
+}
+
+.button-s .glyphicon-remove {
+  color: #ff6666;
+}
+
+.button-s .glyphicon-plus {
+  color: #66cc66;
 }
 
 .glyphicon {
   line-height: 1;
-  padding-left: 3px;
+  margin: 5px;
   font-size: 10px;
+}
+
+.footer {
+  position: fixed;
+  height: 20px;
+  bottom: 0;
+  width: 100%;
+  color: grey;
+  background: #eee;
+}
+
+.right {
+  text-align: right;
 }
