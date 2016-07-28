@@ -26,6 +26,12 @@ a:hover {background: none; color: black; }
   border-bottom: 3px solid #eee;
 }
 
+.navbar li {
+  text-transform: uppercase;
+  font-family: 'Open Sans Condensed', sans-serif;
+  color: #000;
+}
+
 input, textarea, select {
   background: #eee;
   border: 6px solid #eee;
