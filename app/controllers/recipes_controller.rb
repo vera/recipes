@@ -16,7 +16,7 @@ class RecipesController < ApplicationController
   # GET /ideas/new
   def new
     @category = Category.find(params[:category_id])
-    @recipe = @category.idea.build
+    @recipe = @category.recipes.build
   end
 
   # GET /ideas/1/edit
@@ -26,7 +26,7 @@ class RecipesController < ApplicationController
   # POST /ideas
   # POST /ideas.json
   def create
-    @recipe = Recipe.new(idea_params)
+    @recipe = Recipe.new(recipe_params)
 
     respond_to do |format|
       if @recipe.save
