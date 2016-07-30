@@ -1,11 +1,11 @@
-class IdeasController < ApplicationController
-  before_action :set_idea, only: [:show, :edit, :update, :destroy]
+class RecipesController < ApplicationController
+  before_action :set_recipe, only: [:show, :edit, :update, :destroy]
 
   # GET /ideas
   # GET /ideas.json
   def index
     @category = Category.find(params[:category_id])
-    @ideas = Idea.where("category_id = ?", params[:category_id])
+    @recipes = Recipe.where("category_id = ?", params[:category_id])
   end
 
   # GET /ideas/1
@@ -16,7 +16,7 @@ class IdeasController < ApplicationController
   # GET /ideas/new
   def new
     @category = Category.find(params[:category_id])
-    @idea = @category.idea.build
+    @recipe = @category.idea.build
   end
 
   # GET /ideas/1/edit
@@ -26,15 +26,15 @@ class IdeasController < ApplicationController
   # POST /ideas
   # POST /ideas.json
   def create
-    @idea = Idea.new(idea_params)
+    @recipe = Recipe.new(idea_params)
 
     respond_to do |format|
-      if @idea.save
-        format.html { redirect_to @idea, notice: 'Idea was successfully created.' }
+      if @recipe.save
+        format.html { redirect_to @recipe, notice: 'Recipe was successfully created.' }
         format.json { render :show, status: :created, location: @idea }
       else
         format.html { render :new }
-        format.json { render json: @idea.errors, status: :unprocessable_entity }
+        format.json { render json: @recipe.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -43,12 +43,12 @@ class IdeasController < ApplicationController
   # PATCH/PUT /ideas/1.json
   def update
     respond_to do |format|
-      if @idea.update(idea_params)
-        format.html { redirect_to @idea, notice: 'Idea was successfully updated.' }
-        format.json { render :show, status: :ok, location: @idea }
+      if @recipe.update(idea_params)
+        format.html { redirect_to @recipe, notice: 'Recipe was successfully updated.' }
+        format.json { render :show, status: :ok, location: @recipe }
       else
         format.html { render :edit }
-        format.json { render json: @idea.errors, status: :unprocessable_entity }
+        format.json { render json: @recipe.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -56,21 +56,21 @@ class IdeasController < ApplicationController
   # DELETE /ideas/1
   # DELETE /ideas/1.json
   def destroy
-    @idea.destroy
+    @recipe.destroy
     respond_to do |format|
-      format.html { redirect_to root_path, notice: 'Idea was successfully destroyed.' }
+      format.html { redirect_to root_path, notice: 'Recipe was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_idea
-      @idea = Idea.find(params[:id])
+    def set_recipe
+      @recipe = Recipe.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
-    def idea_params
-      params.require(:idea).permit(:name, :description, :picture, :category_id)
+    def recipe_params
+      params.require(:recipe).permit(:name, :description, :picture, :category_id)
     end
 end

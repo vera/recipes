@@ -1,13 +1,15 @@
 <thead>
+  <% if !general %>
   <tr>
     <th class="cat" colspan="<%= empty ? '1' : '5' %>" data-defaultsort='disabled'>
-      <%= link_to category.name, category_ideas_path(category) %>
+      <%= link_to category.name, category_recipes_path(category) %>
     </th>
     <th class="cat button-s right" data-defaultsort='disabled'>
-      <%= link_to new_category_idea_path(category) do %><span class="glyphicon glyphicon-plus"></span><% end %>
+      <%= link_to new_category_recipe_path(category) do %><span class="glyphicon glyphicon-plus"></span><% end %>
       <%= link_to category, method: :delete, data: { confirm: 'Are you sure?' } do %><span class="glyphicon glyphicon-remove"></span><% end %>
     </th>
   </tr>
+  <% end %>
   <% if !empty %>
   <tr>
     <th style="width: 50px;" data-defaultsort='disabled'></th>

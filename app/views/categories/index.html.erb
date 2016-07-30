@@ -1,11 +1,11 @@
 <p id="notice"><%= notice %></p>
 
-<% @ideas.group_by(&:category).each do |category, ideas| %>
+<% @recipes.group_by(&:category).each do |category, recipes| %>
 
   <div class="category">
     <table class="table-hover sortable">
-        <%= render partial: "shared/category_header", locals: {category: category, empty: false} %>
-        <%= render partial: 'shared/ideas_tbody', locals: {ideas: ideas} %>
+        <%= render partial: "shared/category_header", locals: {category: category, empty: false, general: false} %>
+        <%= render partial: 'shared/recipes_tbody', locals: {recipes: recipes} %>
       </table>
       <hr>
   </div>
@@ -15,8 +15,8 @@
 <% @empty_categories.each do |category| %>
 
   <table class="table-hover">
-    <%= render partial: "shared/category_header", locals: {category: category, empty: true} %>
-    <%= render partial: 'shared/ideas_tbody', locals: {ideas: []} %>
+    <%= render partial: "shared/category_header", locals: {category: category, empty: true, general: false} %>
+    <%= render partial: 'shared/recipes_tbody', locals: {recipes: []} %>
   </table>
   <hr>
 

@@ -1,0 +1,12 @@
+<p id="notice"><%= notice %></p>
+<div class="category">
+  <table class="table-hover sortable">
+    <%= render partial: "shared/category_header", locals: {category: @category, empty: @recipes.empty?, general: false} %>
+    <%= render partial: 'shared/recipes_tbody', locals: {recipes: @recipes} %>
+  </table>
+  <hr>
+</div>
+
+<br>
+
+<%= link_to 'Back', root_path %>

@@ -5,8 +5,8 @@ class CategoriesController < ApplicationController
   # GET /categories.json
   def index
     @categories = Category.all
-    @empty_categories = Category.where('id NOT IN (?)', Idea.select("category_id"))
-    @ideas = Idea.all
+    @empty_categories = Category.where('id NOT IN (?)', Recipe.select("category_id"))
+    @recipes = Recipe.all
   end
 
   # GET /categories/1

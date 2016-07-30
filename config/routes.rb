@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   #resources :ideas
 
   resources :categories do
-    resources :ideas, shallow: true
+    resources :recipes, shallow: true
   end
 
   root :to => 'categories#index'

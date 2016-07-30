@@ -3,30 +3,30 @@
 <table>
   <tr>
     <th class="th_vert">Name:</th>
-    <td><%= @idea.name %></td>
+    <td><%= @recipe.name %></td>
   </tr>
 
   <tr>
     <th class="th_vert">Category:</th>
-    <td><%= @idea.category.name %></td>
+    <td><%= @recipe.category.name %></td>
   </tr>
 
   <tr>
     <th class="th_vert">Description:</th>
-    <td><%= @idea.description %></td>
+    <td><%= @recipe.description %></td>
   </tr>
 
-  <% if @idea.picture? %>
+  <% if @recipe.picture? %>
     <tr>
       <th colspan="2">Picture:</th>
     </tr>
     <tr>
-      <td colspan="2"><%= image_tag(@idea.picture_url, :width => 600) %></td>
+      <td colspan="2"><%= image_tag(@recipe.picture_url, :width => 600) %></td>
     </tr>
   <% end %>
 </table>
 
 <br>
 
-<%= link_to 'Edit', edit_idea_path(@idea) %> |
+<%= link_to 'Edit', edit_recipe_path(@recipe) %> |
 <%= link_to 'Back', root_path %>

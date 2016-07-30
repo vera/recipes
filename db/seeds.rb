@@ -8,23 +8,24 @@
 
 
 Category.create!([{
-  name: "Great ideas"
+  name: "Breakfast"
 },{
-  name: "Inspirational ideas"
+  name: "Dinner"
 },{
-  name: "Ideas worth spreading"
+  name: "Snacks"
 }])
 
-Idea.create!([{
-  name: "Creating this app",
-  description: "Such a great idea!",
-  category_id: 1,
-  picture: open(Rails.root + "app/assets/images/screenshot_index.png")
+Recipe.create!([{
+  name: "Lasagna",
+  description: "With tomato sauce, zucchini and spinach.",
+  category_id: 2,
+  picture: open(Rails.root + "app/assets/images/sample_picture_lasagna.png")
+  },{
+  name: "An apple",
+  description: "Keeps the doctor away.",
+  category_id: 1
 },{
-  name: "Another idea",
+  name: "Salad",
   description: "With a really long description: Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor sit amet.",
   category_id: 2
-},{
-  name: "A second inspirational idea",
-  category_id: 2
-  }])
+}])

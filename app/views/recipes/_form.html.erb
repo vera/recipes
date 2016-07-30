@@ -1,10 +1,10 @@
 <%= form_for form_params do |f| %>
-  <% if @idea.errors.any? %>
+  <% if @recipe.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@idea.errors.count, "error") %> prohibited this idea from being saved:</h2>
+      <h2><%= pluralize(@recipe.errors.count, "error") %> prohibited this idea from being saved:</h2>
 
       <ul>
-      <% @idea.errors.full_messages.each do |message| %>
+      <% @recipe.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
       </ul>
