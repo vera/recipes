@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get 'pages/search'
+  post 'pages/search'
+
   get 'pages/info'
 
   #resources :ideas

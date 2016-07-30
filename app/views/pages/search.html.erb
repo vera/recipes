@@ -1,0 +1,22 @@
+<%= form_tag("/pages/search", method: "post") do %>
+<div class="field">
+  <%= label_tag :name %><br/>
+  <%= text_field_tag :name, params[:name] %>
+</div>
+<div class="field">
+  <%= label_tag :category_id %><br>
+  <%= select_tag 'category_id', options_from_collection_for_select(Category.all, :id, :name, params[:category_id]) %>
+</div>
+<div class="actions">
+  <%= submit_tag("Search") %>
+</div>
+<% end %>
+
+<hr>
+
+<div class="category">
+  <table class="table-hover sortable">
+    <%= render partial: 'shared/category_header', locals: {general: true, empty: @recipes.empty?} %>
+    <%= render partial: 'shared/recipes_tbody', locals: {recipes: @recipes} %>
+  </table>
+</div>
