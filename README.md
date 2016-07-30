@@ -1,8 +1,6 @@
 # Recipes app
 
-![Screenshot](/app/assets/images/screenshot_index.png?raw=true "Screenshot of the index page")
-
-(Click to see more.)
+![Logo](/app/assets/images/logo.png?raw=true "Logo")
 
 This is a Ruby on Rails webapp to share recipes. Currently you can upload recipes with descriptions and pictures, display them, sort them and search through them. More to come!
 
@@ -17,6 +15,22 @@ Details:
 * Uses Rspec for testing
 
 * Based on the [Rails Girls Workshop Tutorial](http://guides.railsgirls.com/app)
+
+## Screenshots
+
+**Take a closer look: Click to zoom!**
+
+![Screenshot](/app/assets/images/screenshot_index.png?raw=true "Screenshot of the index page")
+
+The index page displays the three newest recipes in each category.
+
+![Screenshot](/app/assets/images/screenshot_new_recipe.png?raw=true "Screenshot of the New Recipe page")
+
+You can upload new recipes with a picture and a description.
+
+![Screenshot](/app/assets/images/screenshot_search.png?raw=true "Screenshot of the search page")
+
+You can search through uploaded recipes and filter by category and/or name.
 
 ## Installation
 
