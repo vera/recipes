@@ -4,9 +4,7 @@ class CategoriesController < ApplicationController
   # GET /categories
   # GET /categories.json
   def index
-    @categories = Category.all
-    @empty_categories = Category.where('id NOT IN (?)', Recipe.select("category_id"))
-    @recipes = Recipe.all
+    @categories = Category.includes(:recipes).order("recipes.created_at DESC")
   end
 
   # GET /categories/1

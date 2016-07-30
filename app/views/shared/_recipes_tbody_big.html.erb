@@ -5,7 +5,7 @@
           <tr>
           <% recipe_array.each do |recipe|
               unless recipe.nil? %>
-              <td style="width:400px;">
+              <td style="width:350px;">
                 <% if recipe.picture? %>
                    <%= link_to recipe do %><%= image_tag recipe.picture.big_thumb, :class => "big_thumb" %><% end %>
                 <% else %>
@@ -13,7 +13,7 @@
                 <% end %>
               </td>
           <% else %>
-            <td style="width: 400px"></td>
+            <td style="width: 350px"></td>
 
           <% end
         end %>
@@ -26,7 +26,7 @@
 
           <tr>
           <% recipe_array.each do |recipe| %>
-            <td><%= if !recipe.nil? && recipe.description? then recipe.description.truncate_words(9) end %></td>
+            <td class="description"><%= if !recipe.nil? && recipe.description? then recipe.description.truncate_words(9) end %></td>
           <% end %>
           </tr>
 

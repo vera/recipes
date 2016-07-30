@@ -2,22 +2,15 @@
 
 <h1>Newest recipes</h1>
 
-<% @recipes.group_by(&:category).each do |category, recipes| %>
-
+<% @categories.each do |category| %>
   <div class="category">
     <table>
       <%= render partial: 'shared/category_header_big', locals: {category: category} %>
-      <%= render partial: 'shared/recipes_tbody_big', locals: {recipes: recipes} %>
+      <%= render partial: 'shared/recipes_tbody_big', locals: {recipes: category.recipes.order('created_at DESC').limit(3)} %>
+      <tr>
+        <td colspan="3" class="right"><%= link_to category_recipes_path(category) do %>(See all <%= category.recipes.count %> recipes)<% end %></td>
+      </tr>
     </table>
   </div>
-
-<% end %>
-
-<% @empty_categories.each do |category| %>
-
-  <table class="table-hover">
-    <%= render partial: "shared/category_header_big", locals: {category: category} %>
-    <%= render partial: 'shared/recipes_tbody', locals: {recipes: []} %>
-  </table>
 
 <% end %>
