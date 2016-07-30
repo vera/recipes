@@ -1,0 +1,45 @@
+<% unless recipes.empty? %>
+
+      <tbody>
+        <% recipes.in_groups_of(3).each do |recipe_array| %>
+          <tr>
+          <% recipe_array.each do |recipe|
+              unless recipe.nil? %>
+              <td style="width:400px;">
+                <% if recipe.picture? %>
+                   <%= link_to recipe do %><%= image_tag recipe.picture.big_thumb, :class => "big_thumb" %><% end %>
+                <% else %>
+                   <%= image_tag "no_picture_big.png", :class => "big_thumb" %>
+                <% end %>
+              </td>
+          <% else %>
+            <td style="width: 400px"></td>
+
+          <% end
+        end %>
+
+          <tr>
+          <% recipe_array.each do |recipe| %>
+            <th class="th_big"><%= if !recipe.nil? then recipe.name end %></th>
+          <% end %>
+          </tr>
+
+          <tr>
+          <% recipe_array.each do |recipe| %>
+            <td><%= if !recipe.nil? && recipe.description? then recipe.description.truncate_words(9) end %></td>
+          <% end %>
+          </tr>
+
+          </tr>
+        <% end %>
+      </tbody>
+
+    <% else %>
+
+      <tbody>
+        <tr>
+          <td style="height: 50px;" colspan="2">Nothing to show.</td>
+        </tr>
+      </tbody>
+
+<% end %>

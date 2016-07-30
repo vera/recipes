@@ -1,13 +1,14 @@
 <p id="notice"><%= notice %></p>
 
+<h1>Newest recipes</h1>
+
 <% @recipes.group_by(&:category).each do |category, recipes| %>
 
   <div class="category">
-    <table class="table-hover sortable">
-        <%= render partial: "shared/category_header", locals: {category: category, empty: false, general: false} %>
-        <%= render partial: 'shared/recipes_tbody', locals: {recipes: recipes} %>
-      </table>
-      <hr>
+    <table>
+      <%= render partial: 'shared/category_header_big', locals: {category: category} %>
+      <%= render partial: 'shared/recipes_tbody_big', locals: {recipes: recipes} %>
+    </table>
   </div>
 
 <% end %>
@@ -15,13 +16,8 @@
 <% @empty_categories.each do |category| %>
 
   <table class="table-hover">
-    <%= render partial: "shared/category_header", locals: {category: category, empty: true, general: false} %>
+    <%= render partial: "shared/category_header_big", locals: {category: category} %>
     <%= render partial: 'shared/recipes_tbody', locals: {recipes: []} %>
   </table>
-  <hr>
 
 <% end %>
-
-<br>
-
-<%= link_to 'New Category', new_category_path %>

@@ -14,10 +14,12 @@
  *= require_self
 */
 
-body { padding-top: 100px; }
+body { padding-top: 100px; padding-bottom: 100px; }
 footer { margin-top: 100px; position: absolute; bottom: 10px; text-align: right; width: 100%; }
-table, td, th { vertical-align: middle; border: none; }
-th { border-bottom: 1px solid #DDD; }
+table, td, th { vertical-align: middle; border: none; padding: 5px; }
+th {
+  border-bottom: 1px solid #B3CC57;
+}
 a:hover {background: none; color: black; }
 .button { width: 20px; }
 
@@ -40,8 +42,27 @@ th .cat {
   margin-bottom: 20px;
 }
 
+.cat_big {
+  color: #B3CC57;
+  font-size: 32px;
+  border: none;
+  font-weight:normal;
+  padding-bottom: 25px;
+  padding-left: 0px;
+}
+
+.cat_big a {
+  color: #B3CC57;
+  text-decoration: none;
+}
+
+.th_big {
+  color: #404040;
+  border: none;
+}
+
 .button, .button-s {
-  width: 35px;
+  width: 80px;
 }
 
 .button .glyphicon {
@@ -63,15 +84,36 @@ th .cat {
   font-size: 10px;
 }
 
+.category {
+  padding-bottom: 30px;
+}
+
 .footer {
   position: fixed;
   height: 20px;
   bottom: 0;
   width: 100%;
   color: grey;
-  background: #eee;
 }
 
 .right {
   text-align: right;
 }
+
+.dropdown-menu {
+  border-top: 3px solid #dddddd;
+  border-radius: 0px; // Removes round edges
+}
+
+.td-hover>tbody>tr>td:hover, .td-hover>tbody>tr>td:hover{
+        background-color: #f5f5f5;
+  }
+
+  h2 {
+    color: #B3CC57;
+  }
+
+  h1 {
+    color: #bbbbbb;
+    font-size: 20px;
+  }
