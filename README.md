@@ -30,6 +30,29 @@ You can upload new recipes with a picture and a description.
 
 You can search through uploaded recipes and filter by category and/or name.
 
+# Upcoming Features
+
+This is what I plan to add to the application!
+
+- Add more info to recipes
+    - How much time does it take to prepare?
+    - What are the ingredients, how much do they cost, how many calories does it have?
+    - How many portions does it make?
+    - Allow a recipe to be in multiple categories (for example: "Spaghetti Bolognese" fits in "Lunch", "Dinner", and "Student-friendly")
+
+- Add new categories like "Student-friendly", "Vegetarian", "Vegan", "Drinks", ...
+
+- Expand the search feature so you can filter by the new attributes as well
+
+- Allow members to sign up
+    - Only members can upload recipes
+    - Only members can comment, rate, favorite or add a new picture to a recipe
+    - Members can access a list of their favorite recipes
+    - Members have a personal shopping list which they can add recipes to
+    - Only admins can delete/edit categories, and delete/edit recipes that aren't theirs
+
+- Add a "Latest comments" section to the front page
+
 # How to use it
 
 ## Installation
