@@ -8,12 +8,12 @@ RSpec.shared_examples "a model with unique and present name" do |factory|
   end
 
   context 'with a duplicate name' do
-    before  { create(factory) }
-    subject { build(factory)       }
+    before  { create(factory, name: "Name") }
+    subject { build(factory, name: "Name")       }
     it      { is_expected.not_to be_valid  }
 
     context 'bypassing validations' do
-      subject { build(factory).save(validate: false) }
+      subject { build(factory, name: "Name").save(validate: false) }
       it      { expect{ subject }.to raise_error ActiveRecord::RecordNotUnique }
     end
   end

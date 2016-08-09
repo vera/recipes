@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :recipe do
     name "Testrezept"
-    category_id 1
+    association :category
   end
 end

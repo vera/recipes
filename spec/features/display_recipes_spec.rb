@@ -2,9 +2,9 @@ require "rails_helper"
 require "spec_helper"
 
 feature "Display recipes", :type => :feature do
-  let(:category) { create :category }
+  #let(:category) { create :category }
 
-  before { create :recipe, category: category }
+  before { create :recipe }
 
   scenario "See recipes" do
     visit '/categories'
