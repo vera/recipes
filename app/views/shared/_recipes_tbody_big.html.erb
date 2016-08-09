@@ -6,11 +6,12 @@
           <% recipe_array.each do |recipe|
               unless recipe.nil? %>
               <td style="width:350px;">
-                <% if recipe.picture? %>
-                   <%= link_to recipe do %><%= image_tag recipe.picture.big_thumb, :class => "big_thumb" %><% end %>
-                <% else %>
-                   <%= image_tag "no_picture_big.png", :class => "big_thumb" %>
-                <% end %>
+                <% if recipe.picture?
+                  image_url = recipe.picture.big_thumb
+                else
+                  image_url = "no_picture_big.png"
+                end %>
+                   <%= link_to recipe, :class => "recipe-picture-#{recipe.id}" do %><%= image_tag image_url, :class => "big_thumb" %><% end %>
               </td>
           <% else %>
             <td style="width: 350px"></td>
