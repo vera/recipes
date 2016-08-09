@@ -1,6 +1,6 @@
 FactoryGirl.define do
-  factory :idea do
-    name "Testidee"
+  factory :recipe do
+    name "Testrezept"
     category_id 1
   end
 end
