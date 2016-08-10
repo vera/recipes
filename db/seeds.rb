@@ -18,7 +18,8 @@ Category.create!([{
 Recipe.create!([{
   name: "Pfannkuchen",
   picture: open(Rails.root + "app/assets/images/sample_picture_pfannkuchen.jpg"),
-  category_id: 2
+  category_id: 2,
+  preparation_time: 10
 },{
   name: "Pasta with Brussels Sprouts",
   description: "And some other stuff.",
@@ -28,7 +29,8 @@ Recipe.create!([{
   name: "Lasagna",
   description: "With tomato sauce, zucchini and spinach.",
   category_id: 2,
-  picture: open(Rails.root + "app/assets/images/sample_picture_lasagna.png")
+  picture: open(Rails.root + "app/assets/images/sample_picture_lasagna.png"),
+  preparation_time: 70
   },{
   name: "An apple",
   description: "Keeps the doctor away.",
