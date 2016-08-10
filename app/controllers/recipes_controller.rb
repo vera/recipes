@@ -1,37 +1,37 @@
 class RecipesController < ApplicationController
   before_action :set_recipe, only: [:show, :edit, :update, :destroy]
 
-  # GET /ideas
-  # GET /ideas.json
+  # GET /recipes
+  # GET /recipes.json
   def index
     @category = Category.find(params[:category_id])
     @recipes = Recipe.where("category_id = ?", params[:category_id])
   end
 
-  # GET /ideas/1
-  # GET /ideas/1.json
+  # GET /recipes/1
+  # GET /recipes/1.json
   def show
   end
 
-  # GET /ideas/new
+  # GET /recipes/new
   def new
     @category = Category.find(params[:category_id])
     @recipe = @category.recipes.build
   end
 
-  # GET /ideas/1/edit
+  # GET /recipes/1/edit
   def edit
   end
 
-  # POST /ideas
-  # POST /ideas.json
+  # POST /recipes
+  # POST /recipes.json
   def create
     @recipe = Recipe.new(recipe_params)
 
     respond_to do |format|
       if @recipe.save
         format.html { redirect_to @recipe, notice: 'Recipe was successfully created.' }
-        format.json { render :show, status: :created, location: @idea }
+        format.json { render :show, status: :created, location: @recipe }
       else
         format.html { render :new }
         format.json { render json: @recipe.errors, status: :unprocessable_entity }
@@ -39,11 +39,11 @@ class RecipesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /ideas/1
-  # PATCH/PUT /ideas/1.json
+  # PATCH/PUT /recipes/1
+  # PATCH/PUT /recipes/1.json
   def update
     respond_to do |format|
-      if @recipe.update(idea_params)
+      if @recipe.update(recipe_params)
         format.html { redirect_to @recipe, notice: 'Recipe was successfully updated.' }
         format.json { render :show, status: :ok, location: @recipe }
       else
@@ -53,8 +53,8 @@ class RecipesController < ApplicationController
     end
   end
 
-  # DELETE /ideas/1
-  # DELETE /ideas/1.json
+  # DELETE /recipes/1
+  # DELETE /recipes/1.json
   def destroy
     @recipe.destroy
     respond_to do |format|

@@ -5,7 +5,7 @@ feature "Group recipes by category", :type => :feature do
   let(:category2) { create :category }
 
   # 'given' doesn't work for me?
-  # given "given 3 ideas and 2 categories"  do
+  # given "given 3 recipes and 2 categories"  do
   before {
     create :recipe, category: category1, name: "Very Recipe"
     create :recipe, category: category2, name: "So much other category"

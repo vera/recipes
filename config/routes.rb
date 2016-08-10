@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   get 'pages/info'
 
-  #resources :ideas
+  #resources :recipes
 
   resources :categories do
     resources :recipes, shallow: true
@@ -20,7 +20,7 @@ Rails.application.routes.draw do
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
-  ##get 'ideas/:category_id/new' => 'ideas#new', as: :new_idea_in_category
+  ##get 'recipes/:category_id/new' => 'recipes#new', as: :new_recipe_in_category
 
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase

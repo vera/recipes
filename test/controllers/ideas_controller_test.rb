@@ -1,14 +1,14 @@
 require 'test_helper'
 
-class IdeasControllerTest < ActionController::TestCase
+class RecipesControllerTest < ActionController::TestCase
   setup do
-    @idea = ideas(:one)
+    @recipe = recipes(:one)
   end
 
   test "should get index" do
     get :index
     assert_response :success
-    assert_not_nil assigns(:ideas)
+    assert_not_nil assigns(:recipes)
   end
 
   test "should get new" do
@@ -16,34 +16,34 @@ class IdeasControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "should create idea" do
-    assert_difference('Idea.count') do
-      post :create, idea: { description: @idea.description, name: @idea.name, picture: @idea.picture }
+  test "should create recipe" do
+    assert_difference('recipe.count') do
+      post :create, recipe: { description: @recipe.description, name: @recipe.name, picture: @recipe.picture }
     end
 
-    assert_redirected_to idea_path(assigns(:idea))
+    assert_redirected_to recipe_path(assigns(:recipe))
   end
 
-  test "should show idea" do
-    get :show, id: @idea
+  test "should show recipe" do
+    get :show, id: @recipe
     assert_response :success
   end
 
   test "should get edit" do
-    get :edit, id: @idea
+    get :edit, id: @recipe
     assert_response :success
   end
 
-  test "should update idea" do
-    patch :update, id: @idea, idea: { description: @idea.description, name: @idea.name, picture: @idea.picture }
-    assert_redirected_to idea_path(assigns(:idea))
+  test "should update recipe" do
+    patch :update, id: @recipe, recipe: { description: @recipe.description, name: @recipe.name, picture: @recipe.picture }
+    assert_redirected_to recipe_path(assigns(:recipe))
   end
 
-  test "should destroy idea" do
-    assert_difference('Idea.count', -1) do
-      delete :destroy, id: @idea
+  test "should destroy recipe" do
+    assert_difference('recipe.count', -1) do
+      delete :destroy, id: @recipe
     end
 
-    assert_redirected_to ideas_path
+    assert_redirected_to recipes_path
   end
 end
