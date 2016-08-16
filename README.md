@@ -8,11 +8,15 @@ Details:
 
 * Also uses HTML, CSS, Javascript
 
-* Uses a SQLite database to store the recipes
+* Uses a SQLite/PostgreSQL database to store the recipes
 
-* Uses Rspec for testing
+* Uses Rspec and Cucumber for testing
 
 * Based on the [Rails Girls Workshop Tutorial](http://guides.railsgirls.com/app)
+
+# Demo
+
+The app is live on Heroku: [recipeas.herokuapp.com](http://recipeas.herokuapp.com)
 
 # Screenshots
 
