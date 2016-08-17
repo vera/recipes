@@ -5,7 +5,7 @@
           <tr>
             <td style="width: 50px;">
               <% if recipe.picture? %>
-                 <%= image_tag recipe.picture.thumb, :class => "thumb" %>
+                 <%= image_tag recipe.picture_url(:thumb), :class => "thumb" %>
               <% else %>
                  <%= image_tag "no_picture.png", :class => "thumb" %>
               <% end %>

@@ -10,6 +10,8 @@ Details:
 
 * Uses a SQLite/PostgreSQL database to store the recipes
 
+* Uses CarrierWave to upload pictures to Cloudinary
+
 * Uses Rspec and Cucumber for testing
 
 * Based on the [Rails Girls Workshop Tutorial](http://guides.railsgirls.com/app)
@@ -73,13 +75,41 @@ Change into directory and install gems:
 
 `bundle install`
 
+## Setting up the picture uploader
+
+### Saving pictures locally
+
+Comment out the following line in **app/uploaders/picture_uploader.rb**:
+
+`include Cloudinary::CarrierWave`
+
+Remove the comments in the following lines:
+
+`# storage :file`
+
+```
+# def store_dir
+#   "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
+# end
+```
+
+### Saving pictures remotely using Cloudinary
+
+Edit config/cloudinary.yml with your personal Cloudinary cloud_name, api_key and api_secret.
+
+```
+cloud_name: recipeas
+api_key: <%= ENV["CLOUDINARY_API_KEY"] %>
+api_secret: <%= ENV["CLOUDINARY_API_SECRET"] %>
+```
+
+For api_key and api_secret you can set the environment variables CLOUDINARY_API_KEY and CLOUDINARY_API_SECRET on your system.
+
 ## Run the app
 
 Run migrations and seed the database:
 
-`bundle exec rake db:migrate`
-
-`bundle exec rake db:seed`
+`bundle exec rake db:setup`
 
 Start the server:
 

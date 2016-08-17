@@ -15,6 +15,7 @@ gem 'coffee-rails', '~> 4.1.0'
 # Use carrierwave for photo uploads
 gem 'carrierwave'
 gem 'mini_magick'
+gem 'cloudinary'
 
 # Use FactoryGirl to improve test setup
 gem 'factory_girl_rails'

@@ -7,7 +7,7 @@
               unless recipe.nil? %>
               <td style="width:350px;">
                 <% if recipe.picture?
-                  image_url = recipe.picture.big_thumb
+                  image_url = recipe.picture_url(:big_thumb)
                 else
                   image_url = "no_picture_big.png"
                 end %>
