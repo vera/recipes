@@ -1,0 +1,1 @@
+$('.category').html("<table class='table-hover sortable'><%= j render partial: 'shared/category_header', locals: {general: true, empty: @recipes.empty?} %> <%= j render partial: 'shared/recipes_tbody', locals: {recipes: @recipes} %> </table>");

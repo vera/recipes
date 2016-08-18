@@ -20,7 +20,7 @@ $( function() {
 } );
 </script>
 
-<%= form_tag("/pages/search", method: "post") do %>
+<%= form_tag("/pages/search", remote: true, method: "post") do %>
 <div class="field">
   <%= label_tag :name %><br/>
   <%= text_field_tag :name, params[:name] %>

@@ -6,7 +6,7 @@ Details:
 
 * Built with Ruby on Rails
 
-* Also uses HTML, CSS, Javascript
+* Also uses HTML, CSS, Javascript (JQuery and JQuery UI)
 
 * Uses a SQLite/PostgreSQL database to store the recipes
 

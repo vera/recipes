@@ -20,6 +20,11 @@ class PagesController < ApplicationController
     if !params[:category_id].blank?
       @recipes = @recipes.where("category_id = :cid", cid: params[:category_id])
     end
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def info
