@@ -1,3 +1,25 @@
+<script>
+$( function() {
+  $( "#slider" ).slider({
+    range: true,
+    min: <%= @minPreparationTime %>,
+    max: <%= @maxPreparationTime %>,
+    values: [ <%= @minPreparationTimeSelected %>, <%= @maxPreparationTimeSelected %> ],
+    slide: function( event, ui ) {
+      $( "#preparation_time" ).val( ui.values[ 0 ] + "min - " + ui.values[ 1 ] + "min");
+      // Update hidden fields
+      $("#preparation_time_min").val(ui.values[0]);
+      $("#preparation_time_max").val(ui.values[1]);
+    }
+  });
+  $( "#preparation_time" ).val( $( "#slider" ).slider( "values", 0 ) +
+    "min - " + $( "#slider" ).slider( "values", 1 ) + "min");
+  // Update hidden fields
+  $("#preparation_time_min").val( $( "#slider" ).slider( "values", 0 ) );
+  $("#preparation_time_max").val( $( "#slider" ).slider( "values", 1 ) );
+} );
+</script>
+
 <%= form_tag("/pages/search", method: "post") do %>
 <div class="field">
   <%= label_tag :name %><br/>
@@ -6,6 +28,13 @@
 <div class="field">
   <%= label_tag :category_id %><br>
   <%= select_tag 'category_id', options_from_collection_for_select(Category.all, :id, :name, params[:category_id]), prompt: 'All'  %>
+</div>
+<div class="field">
+  <%= label_tag :preparation_time %><br>
+  <input type="text" id="preparation_time" readonly style="border:0; background: #fff; color:#f6931f; font-weight:bold;">
+  <div id="slider"></div>
+  <%= hidden_field_tag :preparation_time_min %>
+  <%= hidden_field_tag :preparation_time_max %>
 </div>
 <div class="actions">
   <%= submit_tag("Search") %>

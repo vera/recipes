@@ -34,7 +34,7 @@ You can upload new recipes with a picture and a description.
 
 ![Screenshot](/app/assets/images/screenshot_search.png?raw=true "Screenshot of the search page")
 
-You can search through uploaded recipes and filter by category and/or name.
+You can search through uploaded recipes and filter by category, name and/or preparation time.
 
 # Upcoming Features
 
