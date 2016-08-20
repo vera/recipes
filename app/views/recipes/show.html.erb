@@ -3,40 +3,40 @@
 <table>
   <tr>
     <th class="th_vert">Name:</th>
-    <td><%= @recipe.name %></td>
+    <td><%= @recipe_presenter.name %></td>
   </tr>
 
   <tr>
     <th class="th_vert">Category:</th>
-    <td><%= @recipe.category.name %></td>
+    <td><%= @recipe_presenter.category.name %></td>
   </tr>
 
   <tr>
     <th class="th_vert">Description:</th>
-    <td><%= @recipe.description %></td>
+    <td><%= @recipe_presenter.description %></td>
   </tr>
 
   <tr>
     <th class="th_vert">Preparation time:</th>
-    <td><%= displayTime(@recipe.preparation_time) %></td>
+    <td><%= @recipe_presenter.time %></td>
   </tr>
 
   <tr>
     <th class="th_vert">Number of servings:</th>
-    <td><%= @recipe.servings %> planned servings</td>
+    <td><%= @recipe_presenter.servings %> </td>
   </tr>
 
-  <% if @recipe.picture? %>
+  <% if @recipe_presenter.picture? %>
     <tr>
       <th colspan="2">Picture:</th>
     </tr>
     <tr>
-      <td colspan="2"><%= image_tag(@recipe.picture_url, :width => 600) %></td>
+      <td colspan="2"><%= image_tag(@recipe_presenter.picture_url, :width => 600) %></td>
     </tr>
   <% end %>
 </table>
 
 <br>
 
-<%= link_to 'Edit', edit_recipe_path(@recipe) %> |
+<%= link_to 'Edit', edit_recipe_path(@recipe_presenter) %> |
 <%= link_to 'Back', root_path %>
