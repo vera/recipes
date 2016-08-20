@@ -21,6 +21,11 @@
     <td><%= displayTime(@recipe.preparation_time) %></td>
   </tr>
 
+  <tr>
+    <th class="th_vert">Number of servings:</th>
+    <td><%= @recipe.servings %> planned servings</td>
+  </tr>
+
   <% if @recipe.picture? %>
     <tr>
       <th colspan="2">Picture:</th>
