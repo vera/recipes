@@ -1,5 +1,7 @@
 ![Logo](/app/assets/images/logo.png?raw=true "Logo")
 
+[![Build Status](https://travis-ci.org/veracl/recipes.svg?branch=master)](https://travis-ci.org/veracl/recipes)
+
 This is a Ruby on Rails webapp to share recipes. Currently you can upload recipes with descriptions and pictures, display them, sort them and search through them. More to come!
 
 Details:
