@@ -15,7 +15,7 @@ class PagesController < ApplicationController
                                 )",
                                 name: "%#{params[:name]}%",
                                 preparation_time_min: @minPreparationTimeSelected,
-                                preparation_time_max: @maxPreparationTimeSelected)
+                                preparation_time_max: @maxPreparationTimeSelected).distinct
 
     if !params[:category_id].blank?
       @recipes = @recipes.where("category_id IN (:cid)", cid: params[:category_id])
