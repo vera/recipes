@@ -1,7 +1,11 @@
-Given(/^there is a recipe:$/) do |table|
+Given(/^there is a recipe/) do |table|
   # table is a Cucumber::MultilineArgument::DataTable
   table.hashes.each do |row|
-    create :recipe, name: row["Name"], preparation_time: row["Preparation time (min)"]
+    create :recipe, {
+      name: row["Name"],
+      preparation_time: row["Preparation time (min)"],
+      servings: row["Number of servings"]
+    }
   end
 end
 
@@ -16,5 +20,11 @@ When(/^I click on the picture labeled with "([^"]*)"$/) do |recipe_name|
 end
 
 Then(/^I see the preparation time$/) do
-  expect(page).to have_text(@recipe.preparation_time)
+  tr_element = find("tr", :text => /Preparation time:/)
+  expect(tr_element).to have_text(@recipe.preparation_time)
+end
+
+Then(/^I see the number of servings$/) do
+  tr_element = find("tr", :text => /Number of servings:/)
+  expect(tr_element).to have_text(@recipe.servings)
 end
