@@ -39,12 +39,14 @@ This is what I plan to add to the application!
     - [ ] What are the ingredients?
       - [ ] How much do they each cost?
     - [ ] How many calories does it have?
-    - [ ] How many portions does it make?
+    - [x] How many portions does it make?
     - [ ] Allow a recipe to be in multiple categories (for example: "Spaghetti Bolognese" fits in "Lunch", "Dinner", and "Student-friendly")
 
 - [ ] Add new categories like "Student-friendly", "Vegetarian", "Vegan", "Drinks", ...
 
 - [ ] Expand the search feature so you can filter by the new attributes as well
+
+- [ ] Find recipes by ingredients
 
 - [ ] Allow members to sign up
     - [ ] Only members can upload recipes
