@@ -2,6 +2,7 @@
 $( function() {
   $( "#slider" ).slider({
     range: true,
+    step: 5,
     min: <%= @minPreparationTime %>,
     max: <%= @maxPreparationTime %>,
     values: [ <%= @minPreparationTimeSelected %>, <%= @maxPreparationTimeSelected %> ],
@@ -55,27 +56,59 @@ $( function() {
       dataType: 'script'
     });
   });
+
+  // Send ajax request when an ingredient is selected
+  $('#ingredient_id').change(function () {
+    var data = $(search_form).serializeArray();
+    $.ajax({
+      type: 'post',
+      beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+      url: '/pages/search',
+      data: data,
+      dataType: 'script'
+    });
+  });
 } );
 </script>
 
 <%= form_tag("/pages/search", remote: true, method: "post", id: "search_form") do %>
-<div class="field">
-  <%= label_tag :name %><br/>
-  <%= text_field_tag :name, params[:name] %>
+<div class="row">
+  <div class="col-md-6">
+
+    <div class="field">
+      <%= label_tag :name %><br/>
+      <%= text_field_tag :name, params[:name], class: 'form-control' %>
+    </div>
+    <div class="field">
+      <%= label_tag :category_id %><br>
+      <%= select_tag 'category_id', options_from_collection_for_select(Category.all, :id, :name, params[:category_id]), class: 'form-control', multiple: true  %>
+    </div>
+
+  </div>
+  <div class="col-md-6">
+
+    <div class="field">
+      <%= label_tag :preparation_time %><br>
+      <input type="text" id="preparation_time" readonly style="border:0; background: #fff; color:#f6931f; font-weight:bold;">
+      <div id="slider"></div>
+      <%= hidden_field_tag :preparation_time_min %>
+      <%= hidden_field_tag :preparation_time_max %>
+    </div>
+    <div class="field">
+      <%= label_tag :ingredients %><br />
+      <%= select_tag 'ingredient_id', options_from_collection_for_select(Ingredient.all, :id, :name, params[:ingredient_id]), class: 'form-control', multiple: true  %>
+    </div>
+
+  </div>
 </div>
-<div class="field">
-  <%= label_tag :category_id %><br>
-  <%= select_tag 'category_id', options_from_collection_for_select(Category.all, :id, :name, params[:category_id]), prompt: 'All'  %>
-</div>
-<div class="field">
-  <%= label_tag :preparation_time %><br>
-  <input type="text" id="preparation_time" readonly style="border:0; background: #fff; color:#f6931f; font-weight:bold;">
-  <div id="slider"></div>
-  <%= hidden_field_tag :preparation_time_min %>
-  <%= hidden_field_tag :preparation_time_max %>
-</div>
-<div class="actions">
-  <%= submit_tag("Search") %>
+<div class="row">
+  <div class="col-md-12">
+
+    <div class="actions">
+      <%= submit_tag 'Search', class: 'btn btn-primary' %>
+    </div>
+
+  </div>
 </div>
 <% end %>
 

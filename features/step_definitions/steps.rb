@@ -38,7 +38,8 @@ When(/^I visit the search page$/) do
 end
 
 When(/^I select the ingredient "([^"]*)"$/) do |ingredient|
-  page.select ingredient, :from => 'ingredients'
+  page.select ingredient, :from => 'ingredient_id'
+  find('input[name="commit"]').click
 end
 
 Then(/^I see the preparation time$/) do
