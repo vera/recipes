@@ -11,6 +11,7 @@ class RecipesController < ApplicationController
   # GET /recipes/1
   # GET /recipes/1.json
   def show
+    @recipe_presenter = RecipePresenter.new(@recipe)
   end
 
   # GET /recipes/new
