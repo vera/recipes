@@ -6,4 +6,6 @@ class Recipe < ActiveRecord::Base
   mount_uploader :picture, PictureUploader
 
   belongs_to :category
+
+  has_and_belongs_to_many :ingredients
 end
