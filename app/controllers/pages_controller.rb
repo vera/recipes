@@ -5,7 +5,7 @@ class PagesController < ApplicationController
     @minPreparationTimeSelected = params[:preparation_time_min] || @minPreparationTime
     @maxPreparationTimeSelected = params[:preparation_time_max] || @maxPreparationTime
 
-    @recipes = Recipe.where("name LIKE :name AND
+    @recipes = Recipe.where("recipes.name LIKE :name AND
                                 (
                                     (
                                     preparation_time >= :preparation_time_min AND
@@ -18,7 +18,11 @@ class PagesController < ApplicationController
                                 preparation_time_max: @maxPreparationTimeSelected)
 
     if !params[:category_id].blank?
-      @recipes = @recipes.where("category_id = :cid", cid: params[:category_id])
+      @recipes = @recipes.where("category_id IN (:cid)", cid: params[:category_id])
+    end
+
+    if !params[:ingredient_id].blank?
+      @recipes = @recipes.joins(:ingredients).where("ingredient_id IN (:iid)", iid: params[:ingredient_id])
     end
 
     respond_to do |format|
