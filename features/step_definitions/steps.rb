@@ -45,6 +45,19 @@ When(/^I select the ingredient "([^"]*)"$/) do |ingredient|
   find('input[name="commit"]').click
 end
 
+When(/^I visit the weekplanner page$/) do
+  visit '/pages/weekplanner'
+end
+
+Then(/^I see the current day and the following six days$/) do
+  time = Time.new
+  days = Array.new
+  for i in 0..6
+    days << (time + 24*60*60*i).strftime("%d (%a)")
+    expect(page).to have_text(days.at(i))
+  end
+end
+
 Then(/^I see the preparation time$/) do
   tr_element = find("tr", :text => /Preparation time:/)
   expect(tr_element).to have_text(@recipe.preparation_time)

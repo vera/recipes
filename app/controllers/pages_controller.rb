@@ -42,6 +42,15 @@ class PagesController < ApplicationController
 
     @recipes = get_search_results(params[:name], @minPreparationTimeSelected, @maxPreparationTimeSelected, params[:category_id], params[:ingredient_id])
 
+    time = Time.new
+    @days = Array.new
+    @days_strings = Array.new
+    for i in 0..6
+      @days << (time + 24*60*60*i)
+      @days_strings << (time + 24*60*60*i).strftime("%d (%a)")
+    end
+    @week = time.strftime("%W (" + @days.at(0).strftime("%d. %b") + " - " + @days.at(6).strftime("%d. %b") + ")")
+
     respond_to do |format|
       format.html
       format.js

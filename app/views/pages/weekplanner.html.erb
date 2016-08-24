@@ -215,31 +215,31 @@ $( function() {
   </div>
 
   <div class="col-md-8 ui-widget ui-helper-clearfix">
-    <h2>Week #</h2>
+    <h2>Week #<%= @week %></h2>
     <div class="row">
       <div class="col-md-3"></div>
       <div class="col-md-3 weekday" id="weekday1" class="ui-widget-content ui-state-default">
-        <h4 class="ui-widget-header">1</h4>
+        <h4 class="ui-widget-header"><%= @days_strings.at(0) %></h4>
       </div>
       <div class="col-md-3 weekday" id="weekday2" class="ui-widget-content ui-state-default">
-        <h4 class="ui-widget-header">2</h4>
+        <h4 class="ui-widget-header"><%= @days_strings.at(1) %></h4>
       </div>
       <div class="col-md-3 weekday" id="weekday3" class="ui-widget-content ui-state-default">
-        <h4 class="ui-widget-header">3</h4>
+        <h4 class="ui-widget-header"><%= @days_strings.at(2) %></h4>
       </div>
     </div>
     <div class="row">
       <div class="col-md-3 weekday" id="weekday4" class="ui-widget-content ui-state-default">
-        <h4 class="ui-widget-header">4</h4>
+        <h4 class="ui-widget-header"><%= @days_strings.at(3) %></h4>
       </div>
       <div class="col-md-3 weekday" id="weekday5" class="ui-widget-content ui-state-default">
-        <h4 class="ui-widget-header">5</h4>
+        <h4 class="ui-widget-header"><%= @days_strings.at(4) %></h4>
       </div>
       <div class="col-md-3 weekday" id="weekday6" class="ui-widget-content ui-state-default">
-        <h4 class="ui-widget-header">6</h4>
+        <h4 class="ui-widget-header"><%= @days_strings.at(5) %></h4>
       </div>
       <div class="col-md-3 weekday" id="weekday7" class="ui-widget-content ui-state-default">
-        <h4 class="ui-widget-header">7</h4>
+        <h4 class="ui-widget-header"><%= @days_strings.at(6) %></h4>
       </div>
     </div>
 
