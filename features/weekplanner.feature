@@ -7,6 +7,7 @@ Scenario: See the days of the current week
   When I visit the weekplanner page
   Then I see the current day and the following six days
 
+@javascript
 Scenario: Plan the meals of the current week and create a shopping list
   Given there are these recipes:
   | Name                      | Ingredients |
