@@ -58,6 +58,13 @@ Then(/^I see the current day and the following six days$/) do
   end
 end
 
+When(/^I drop the recipe labeled with "([^"]*)" into the day with number "([^"]*)"$/) do |recipe_name, day|
+  @recipe = Recipe.find_by(name: recipe_name)
+  source = page.find(".recipe-#{@recipe.id}")
+  target = page.find("#weekday#{day}")
+  source.drag_to(target)
+end
+
 Then(/^I see the preparation time$/) do
   tr_element = find("tr", :text => /Preparation time:/)
   expect(tr_element).to have_text(@recipe.preparation_time)
@@ -78,4 +85,15 @@ Then(/^I see the list of ingredients$/) do
   @recipe.ingredients.each do |ingredient|
     expect(tr_element).to have_text(ingredient.name)
   end
+end
+
+Then(/^I see "([^"]*)" in the shopping list$/) do |expectedText|
+  save_and_open_page
+  shopping_list = find(".shopping_list")
+  expect(shopping_list).to have_text(expectedText)
+end
+
+Then(/^I don't see "([^"]*)" in the shopping list$/) do |notExpectedText|
+  shopping_list = find(".shopping_list")
+  expect(shopping_list).not_to have_text(notExpectedText)
 end

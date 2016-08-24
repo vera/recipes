@@ -15,9 +15,8 @@ Scenario: Plan the meals of the current week and create a shopping list
   | Noodles with tomato sauce | Tomatoes    |
   | Salad                     | Lettuce     |
   When I visit the weekplanner page
-  And I drop the recipe labeled with "Fried rice" into the day labeled with "Monday"
-  And I drop the recipe labeled with "Salad" into the day labeled with "Thursday"
-  And I press the button "Create shopping list"
-  Then I see "Rice"
-  And I see "Lettuce"
-  And I don't see "Tomatoes"
+  And I drop the recipe labeled with "Fried rice" into the day with number "1"
+  And I drop the recipe labeled with "Salad" into the day with number "5"
+  Then I see "Rice" in the shopping list
+  And I see "Lettuce" in the shopping list
+  And I don't see "Tomatoes" in the shopping list
