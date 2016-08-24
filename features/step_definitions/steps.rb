@@ -1,17 +1,20 @@
 def createRecipes(table)
   table.hashes.each do |row|
-    ingredient = create :ingredient, {
-      name: row["Ingredients"]
-    }
-
     recipe = create :recipe, {
       name: row["Name"],
       preparation_time: row["Preparation time (min)"],
       servings: row["Number of servings"]
     }
 
-    recipe.ingredients << ingredient
-    recipe.save
+    if !row["Ingredients"].blank?
+      row["Ingredients"].split(",").each do |ingredient_name|
+        ingredient = create :ingredient, {
+          name: ingredient_name
+        }
+        recipe.ingredients << ingredient
+      end
+      recipe.save
+    end
   end
 end
 
@@ -55,4 +58,11 @@ end
 Then(/^I see "([^"]*)" but not "([^"]*)"$/) do |matchingRecipe, notMatchingRecipe|
   expect(page).to have_text(matchingRecipe)
   expect(page).not_to have_text(notMatchingRecipe)
+end
+
+Then(/^I see the list of ingredients$/) do
+  tr_element = find("tr", :text => /Ingredients:/)
+  @recipe.ingredients.each do |ingredient|
+    expect(tr_element).to have_text(ingredient.name)
+  end
 end

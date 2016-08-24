@@ -26,6 +26,17 @@
     <td><%= @recipe_presenter.servings %> </td>
   </tr>
 
+  <tr>
+    <th class="th_vert">Ingredients:</th>
+    <td>
+      <%= content_tag 'ul' do %>
+        <% @recipe.ingredients.each do |ingredient| %>
+          <%= content_tag 'li', ingredient.name %>
+        <% end
+      end %>
+    </td>
+  </tr>
+
   <% if @recipe_presenter.picture? %>
     <tr>
       <th colspan="2">Picture:</th>
