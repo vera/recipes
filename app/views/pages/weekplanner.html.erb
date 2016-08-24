@@ -69,12 +69,15 @@ $( function() {
     });
   });
 
-  // There's the gallery and the trash
-  var $gallery = $( "#results" ),
-    $trash = $( "#weekday1" );
+  ///////////////////////////////////////////////////
+  // Droppable and draggable                      //
+  /////////////////////////////////////////////////
 
-  // Let the gallery items be draggable
-  $( "li", $gallery ).draggable({
+  // There's the gallery and the trash
+  var $results = $( "#results" );
+
+  // Let the recipe items be draggable
+  $( "li", $results ).draggable({
     cancel: "a.ui-icon", // clicking an icon won't initiate dragging
     revert: "invalid", // when not dropped, the item will revert back to its initial position
     containment: "document",
@@ -82,84 +85,31 @@ $( function() {
     cursor: "move"
   });
 
-  // Let the trash be droppable, accepting the gallery items
-  $trash.droppable({
+  // Let the weekdays be droppable, accepting the recipe items
+  $(".weekday").droppable({
     accept: "#results > li",
     classes: {
       "ui-droppable-active": "ui-state-highlight"
     },
     drop: function( event, ui ) {
-      deleteImage( ui.draggable );
-    }
-  });
-
-  // Let the gallery be droppable as well, accepting items from the trash
-  $gallery.droppable({
-    accept: "#trash li",
-    classes: {
-      "ui-droppable-active": "custom-state-active"
-    },
-    drop: function( event, ui ) {
-      recycleImage( ui.draggable );
+      deleteImage( ui.draggable, $(this).attr('id') );
     }
   });
 
   // Image deletion function
-  var recycle_icon = "<a href='link/to/recycle/script/when/we/have/js/off' title='Recycle this image' class='ui-icon ui-icon-refresh'>Recycle image</a>";
-  function deleteImage( $item ) {
+  function deleteImage( $item, $weekday_id ) {
     $item.fadeOut(function() {
-      var $list = $( "ul", $trash ).length ?
-        $( "ul", $trash ) :
-        $( "<ul class='weekplan ui-helper-reset'/>" ).appendTo( $trash );
+      $weekday = $( "#"+$weekday_id );
+
+      var $list = $( "ul", $weekday ).length ?
+        $( "ul", $weekday ) :
+        $( "<ul class='weekplan ui-helper-reset'/>" ).appendTo( $weekday );
 
       $item.find( "a.ui-icon-trash" ).remove();
-      //$item.append( recycle_icon ).appendTo( $list ).fadeIn(function() {
-      $list.append('<li>'+$item.find( ".ui-widget-header" ).text()+'</li>').fadeIn(function() {
-        $item
-          // .animate({ width: "48px" });
-          //.find( "img" )
-          //  .animate({ height: "36px" });
-      });
+      $list.append('<li>'+$item.find( ".ui-widget-header" ).text()+'</li>');
+
+      $( ".shopping_list" ).append( $item.find( ".ingredients" ).html() );
     });
-  }
-
-  // Image recycle function
-  var trash_icon = "<a href='link/to/trash/script/when/we/have/js/off' title='Delete this image' class='ui-icon ui-icon-trash'>Delete image</a>";
-  function recycleImage( $item ) {
-    $item.fadeOut(function() {
-      $item
-        .find( "a.ui-icon-refresh" )
-          .remove()
-        .end()
-        .css( "width", "96px")
-        .append( trash_icon )
-        .find( "img" )
-          .css( "height", "72px" )
-        .end()
-        .appendTo( $gallery )
-        .fadeIn();
-    });
-  }
-
-  // Image preview function, demonstrating the ui.dialog used as a modal window
-  function viewLargerImage( $link ) {
-    var src = $link.attr( "href" ),
-      title = $link.siblings( "img" ).attr( "alt" ),
-      $modal = $( "img[src$='" + src + "']" );
-
-    if ( $modal.length ) {
-      $modal.dialog( "open" );
-    } else {
-      var img = $( "<img alt='" + title + "' width='384' height='288' style='display: none; padding: 8px;' />" )
-        .attr( "src", src ).appendTo( "body" );
-      setTimeout(function() {
-        img.dialog({
-          title: title,
-          width: 400,
-          modal: true
-        });
-      }, 1 );
-    }
   }
 
   // Resolve the icons behavior with event delegation
@@ -177,45 +127,17 @@ $( function() {
 
     return false;
   });
-
 } );
 </script>
 
-<h1>Weekplanner</h1>
+<h1>Week Planner</h1>
 <div class="row">
-  <div class="col-md-4">
-    <h2>Filter</h2>
-    <%= form_tag("/pages/weekplanner", remote: true, method: "post", id: "search_form") do %>
-
-      <div class="field">
-        <%= label_tag :name %><br/>
-        <%= text_field_tag :name, params[:name], class: 'form-control' %>
-      </div>
-      <div class="field">
-        <%= label_tag :category_id %><br>
-        <%= select_tag 'category_id', options_from_collection_for_select(Category.all, :id, :name, params[:category_id]), class: 'form-control', multiple: true  %>
-      </div>
-      <div class="field">
-        <%= label_tag :preparation_time %><br>
-        <input type="text" id="preparation_time" readonly style="border:0; background: #fff; color:#f6931f; font-weight:bold;">
-        <div id="slider"></div>
-        <%= hidden_field_tag :preparation_time_min %>
-        <%= hidden_field_tag :preparation_time_max %>
-      </div>
-      <div class="field">
-        <%= label_tag :ingredients %><br />
-        <%= select_tag 'ingredient_id', options_from_collection_for_select(Ingredient.all, :id, :name, params[:ingredient_id]), class: 'form-control', multiple: true  %>
-      </div>
-
-      <div class="actions">
-        <%= submit_tag 'Search', class: 'btn btn-primary' %>
-      </div>
-
-    <% end %>
+  <div class="col-md-4 shopping_list">
+    <h2>Shopping list</h2>
   </div>
 
   <div class="col-md-8 ui-widget ui-helper-clearfix">
-    <h2>Week #<%= @week %></h2>
+    <h2>Week <%= @week %></h2>
     <div class="row">
       <div class="col-md-3"></div>
       <div class="col-md-3 weekday" id="weekday1" class="ui-widget-content ui-state-default">
@@ -242,9 +164,43 @@ $( function() {
         <h4 class="ui-widget-header"><%= @days_strings.at(6) %></h4>
       </div>
     </div>
+    
+  </div>
+</div>
 
-    <hr>
+<div class="row">
+  <div class="col-md-4">
+    <h2>Filter</h2>
+    <%= form_tag("/pages/weekplanner", remote: true, method: "post", id: "search_form") do %>
 
+      <div class="field">
+        <%= label_tag :name %><br/>
+        <%= text_field_tag :name, params[:name], class: 'form-control' %>
+      </div>
+      <div class="field">
+        <%= label_tag :category_id %><br>
+        <%= select_tag 'category_id', options_from_collection_for_select(Category.all, :id, :name, params[:category_id]), class: 'form-control', multiple: true  %>
+      </div>
+      <div class="field">
+        <%= label_tag :preparation_time %><br>
+        <input type="text" id="preparation_time" readonly style="border:0; background: #fff; color:#f6931f; font-weight:bold;">
+        <div id="slider"></div>
+        <%= hidden_field_tag :preparation_time_min %>
+        <%= hidden_field_tag :preparation_time_max %>
+      </div>
+      <div class="field">
+        <%= label_tag :ingredients %><br />
+        <%= select_tag 'ingredient_id', options_from_collection_for_select(Ingredient.all, :id, :name, params[:ingredient_id]), class: 'form-control', multiple: true  %>
+      </div>
+
+      <div class="actions">
+        <%= submit_tag 'Search', class: 'btn' %>
+      </div>
+
+    <% end %>
+  </div>
+
+  <div class="col-md-8">
     <h2>Search results</h2>
 
     <div class="results">
@@ -252,6 +208,6 @@ $( function() {
         <%= render partial: 'shared/recipes_list', locals: {recipes: @recipes} %>
       </ul>
     </div>
-
   </div>
+
 </div>
