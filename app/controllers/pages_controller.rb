@@ -33,4 +33,18 @@ class PagesController < ApplicationController
 
   def info
   end
+
+  def weekplanner
+    @minPreparationTime = Recipe.minimum(:preparation_time)
+    @maxPreparationTime = Recipe.maximum(:preparation_time)
+    @minPreparationTimeSelected = params[:preparation_time_min] || @minPreparationTime
+    @maxPreparationTimeSelected = params[:preparation_time_max] || @maxPreparationTime
+
+    @recipes = get_search_results(params[:name], @minPreparationTimeSelected, @maxPreparationTimeSelected, params[:category_id], params[:ingredient_id])
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
 end

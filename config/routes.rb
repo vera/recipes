@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get 'pages/weekplanner'
+  post 'pages/weekplanner'
+
   get 'pages/search'
   post 'pages/search'
 

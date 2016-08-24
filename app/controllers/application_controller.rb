@@ -8,4 +8,28 @@ class ApplicationController < ActionController::Base
   def set_categories
     @categories_dd = Category.order("name ASC")
   end
+
+  def get_search_results(name, minPreparationTimeSelected, maxPreparationTimeSelected, category_id, ingredient_id)
+    recipes = Recipe.where("recipes.name LIKE :name AND
+                                (
+                                    (
+                                    preparation_time >= :preparation_time_min AND
+                                    preparation_time <= :preparation_time_max
+                                    )
+                                  OR preparation_time IS NULL
+                                )",
+                                name: "%#{name}%",
+                                preparation_time_min: minPreparationTimeSelected,
+                                preparation_time_max: maxPreparationTimeSelected).distinct
+
+    if !category_id.blank?
+      recipes = recipes.where("category_id IN (:cid)", cid: category_id)
+    end
+
+    if !ingredient_id.blank?
+      recipes = recipes.joins(:ingredients).where("ingredient_id IN (:iid)", iid: ingredient_id)
+    end
+
+    return recipes
+  end
 end

@@ -16,4 +16,11 @@ RSpec.describe PagesController, type: :controller do
     end
   end
 
+  describe "GET #weekplanner" do
+    it "returns http success" do
+      get :search
+      expect(response).to have_http_status(:success)
+    end
+  end
+
 end

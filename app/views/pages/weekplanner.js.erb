@@ -1,0 +1,3 @@
+$('.results').hide();
+$('.results').html("<ul id='results' class='results ui-helper-reset ui-helper-clearfix'><%= j render partial: 'shared/recipes_list', locals: {recipes: @recipes} %></ul>");
+$('.results').fadeIn();

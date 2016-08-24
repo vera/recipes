@@ -1,0 +1,257 @@
+<script>
+$( function() {
+  $( "#slider" ).slider({
+    range: true,
+    step: 5,
+    min: <%= @minPreparationTime %>,
+    max: <%= @maxPreparationTime %>,
+    values: [ <%= @minPreparationTimeSelected %>, <%= @maxPreparationTimeSelected %> ],
+    slide: function( event, ui ) {
+      // When slider is changed
+      // Update label
+      $( "#preparation_time" ).val( ui.values[ 0 ] + "min - " + ui.values[ 1 ] + "min");
+      // Update hidden fields
+      $("#preparation_time_min").val(ui.values[0]);
+      $("#preparation_time_max").val(ui.values[1]);
+      // Send ajax request
+      var data = $(search_form).serializeArray();
+      $.ajax({
+        type: 'post',
+        beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+        url: '/pages/search',
+        data: data,
+        dataType: 'script'
+      });
+    }
+  });
+
+  // Initialize slider
+  // Set label
+  $( "#preparation_time" ).val( $( "#slider" ).slider( "values", 0 ) +
+    "min - " + $( "#slider" ).slider( "values", 1 ) + "min");
+  // Set hidden fields
+  $("#preparation_time_min").val( $( "#slider" ).slider( "values", 0 ) );
+  $("#preparation_time_max").val( $( "#slider" ).slider( "values", 1 ) );
+
+  // Send ajax request when something is typed in the name field
+  $('#name').keyup(function () {
+    var data = $(search_form).serializeArray();
+    $.ajax({
+      type: 'post',
+      beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+      url: '/pages/search',
+      data: data,
+      dataType: 'script'
+    });
+  });
+
+  // Send ajax request when a category is selected
+  $('#category_id').change(function () {
+    var data = $(search_form).serializeArray();
+    $.ajax({
+      type: 'post',
+      beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+      url: '/pages/weekplanner',
+      data: data,
+      dataType: 'script'
+    });
+  });
+
+  // Send ajax request when an ingredient is selected
+  $('#ingredient_id').change(function () {
+    var data = $(search_form).serializeArray();
+    $.ajax({
+      type: 'post',
+      beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+      url: '/pages/weekplanner',
+      data: data,
+      dataType: 'script'
+    });
+  });
+
+  // There's the gallery and the trash
+  var $gallery = $( "#results" ),
+    $trash = $( "#weekday1" );
+
+  // Let the gallery items be draggable
+  $( "li", $gallery ).draggable({
+    cancel: "a.ui-icon", // clicking an icon won't initiate dragging
+    revert: "invalid", // when not dropped, the item will revert back to its initial position
+    containment: "document",
+    helper: "clone",
+    cursor: "move"
+  });
+
+  // Let the trash be droppable, accepting the gallery items
+  $trash.droppable({
+    accept: "#results > li",
+    classes: {
+      "ui-droppable-active": "ui-state-highlight"
+    },
+    drop: function( event, ui ) {
+      deleteImage( ui.draggable );
+    }
+  });
+
+  // Let the gallery be droppable as well, accepting items from the trash
+  $gallery.droppable({
+    accept: "#trash li",
+    classes: {
+      "ui-droppable-active": "custom-state-active"
+    },
+    drop: function( event, ui ) {
+      recycleImage( ui.draggable );
+    }
+  });
+
+  // Image deletion function
+  var recycle_icon = "<a href='link/to/recycle/script/when/we/have/js/off' title='Recycle this image' class='ui-icon ui-icon-refresh'>Recycle image</a>";
+  function deleteImage( $item ) {
+    $item.fadeOut(function() {
+      var $list = $( "ul", $trash ).length ?
+        $( "ul", $trash ) :
+        $( "<ul class='weekplan ui-helper-reset'/>" ).appendTo( $trash );
+
+      $item.find( "a.ui-icon-trash" ).remove();
+      //$item.append( recycle_icon ).appendTo( $list ).fadeIn(function() {
+      $list.append('<li>'+$item.find( ".ui-widget-header" ).text()+'</li>').fadeIn(function() {
+        $item
+          // .animate({ width: "48px" });
+          //.find( "img" )
+          //  .animate({ height: "36px" });
+      });
+    });
+  }
+
+  // Image recycle function
+  var trash_icon = "<a href='link/to/trash/script/when/we/have/js/off' title='Delete this image' class='ui-icon ui-icon-trash'>Delete image</a>";
+  function recycleImage( $item ) {
+    $item.fadeOut(function() {
+      $item
+        .find( "a.ui-icon-refresh" )
+          .remove()
+        .end()
+        .css( "width", "96px")
+        .append( trash_icon )
+        .find( "img" )
+          .css( "height", "72px" )
+        .end()
+        .appendTo( $gallery )
+        .fadeIn();
+    });
+  }
+
+  // Image preview function, demonstrating the ui.dialog used as a modal window
+  function viewLargerImage( $link ) {
+    var src = $link.attr( "href" ),
+      title = $link.siblings( "img" ).attr( "alt" ),
+      $modal = $( "img[src$='" + src + "']" );
+
+    if ( $modal.length ) {
+      $modal.dialog( "open" );
+    } else {
+      var img = $( "<img alt='" + title + "' width='384' height='288' style='display: none; padding: 8px;' />" )
+        .attr( "src", src ).appendTo( "body" );
+      setTimeout(function() {
+        img.dialog({
+          title: title,
+          width: 400,
+          modal: true
+        });
+      }, 1 );
+    }
+  }
+
+  // Resolve the icons behavior with event delegation
+  $( "ul.gallery > li" ).on( "click", function( event ) {
+    var $item = $( this ),
+      $target = $( event.target );
+
+    if ( $target.is( "a.ui-icon-trash" ) ) {
+      deleteImage( $item );
+    } else if ( $target.is( "a.ui-icon-zoomin" ) ) {
+      viewLargerImage( $target );
+    } else if ( $target.is( "a.ui-icon-refresh" ) ) {
+      recycleImage( $item );
+    }
+
+    return false;
+  });
+
+} );
+</script>
+
+<h1>Weekplanner</h1>
+<div class="row">
+  <div class="col-md-4">
+    <h2>Filter</h2>
+    <%= form_tag("/pages/weekplanner", remote: true, method: "post", id: "search_form") do %>
+
+      <div class="field">
+        <%= label_tag :name %><br/>
+        <%= text_field_tag :name, params[:name], class: 'form-control' %>
+      </div>
+      <div class="field">
+        <%= label_tag :category_id %><br>
+        <%= select_tag 'category_id', options_from_collection_for_select(Category.all, :id, :name, params[:category_id]), class: 'form-control', multiple: true  %>
+      </div>
+      <div class="field">
+        <%= label_tag :preparation_time %><br>
+        <input type="text" id="preparation_time" readonly style="border:0; background: #fff; color:#f6931f; font-weight:bold;">
+        <div id="slider"></div>
+        <%= hidden_field_tag :preparation_time_min %>
+        <%= hidden_field_tag :preparation_time_max %>
+      </div>
+      <div class="field">
+        <%= label_tag :ingredients %><br />
+        <%= select_tag 'ingredient_id', options_from_collection_for_select(Ingredient.all, :id, :name, params[:ingredient_id]), class: 'form-control', multiple: true  %>
+      </div>
+
+      <div class="actions">
+        <%= submit_tag 'Search', class: 'btn btn-primary' %>
+      </div>
+
+    <% end %>
+  </div>
+
+  <div class="col-md-8 ui-widget ui-helper-clearfix">
+    <h2>Week #</h2>
+    <div class="row">
+      <div class="col-md-3"></div>
+      <div class="col-md-3 weekday" id="weekday1" class="ui-widget-content ui-state-default">
+        <h4 class="ui-widget-header">1</h4>
+      </div>
+      <div class="col-md-3 weekday" id="weekday2" class="ui-widget-content ui-state-default">
+        <h4 class="ui-widget-header">2</h4>
+      </div>
+      <div class="col-md-3 weekday" id="weekday3" class="ui-widget-content ui-state-default">
+        <h4 class="ui-widget-header">3</h4>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-3 weekday" id="weekday4" class="ui-widget-content ui-state-default">
+        <h4 class="ui-widget-header">4</h4>
+      </div>
+      <div class="col-md-3 weekday" id="weekday5" class="ui-widget-content ui-state-default">
+        <h4 class="ui-widget-header">5</h4>
+      </div>
+      <div class="col-md-3 weekday" id="weekday6" class="ui-widget-content ui-state-default">
+        <h4 class="ui-widget-header">6</h4>
+      </div>
+      <div class="col-md-3 weekday" id="weekday7" class="ui-widget-content ui-state-default">
+        <h4 class="ui-widget-header">7</h4>
+      </div>
+    </div>
+
+    <hr>
+
+    <h2>Search results</h2>
+
+    <div class="results">
+      <ul id="results" class="results ui-helper-reset ui-helper-clearfix">
+        <%= render partial: 'shared/recipes_list', locals: {recipes: @recipes} %>
+      </ul>
+    </div>
+
+  </div>
+</div>
