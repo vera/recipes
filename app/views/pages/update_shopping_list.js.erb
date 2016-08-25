@@ -1,0 +1,3 @@
+$('.shopping_list').hide();
+$('.shopping_list').html("<h2>Shopping list</h2><%= j render partial: 'shared/shopping_list', locals: {ingredients: @shopping_list} %></ul>");
+$('.shopping_list').fadeIn();

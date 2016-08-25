@@ -1,3 +1,19 @@
 // Place all the styles related to the pages controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+// weekplanner
+
+#gallery { float: left; width: 65%; min-height: 12em; }
+.gallery.custom-state-active { background: #eee; }
+.results li { float: left; width: 350px; margin: 0.2em; }
+.results li h5 { margin: 0.2em; cursor: move; }
+.gallery li a { float: right; }
+.gallery li a.ui-icon-zoomin { float: left; }
+.results li img { cursor: move; border:0px; }
+
+.weekday { height: 150px; overflow: auto; }
+.weekday h4 { padding: 3px; }
+.weekday .results li img { display: none; }
+
+.ingredients { display: none; }

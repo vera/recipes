@@ -6,8 +6,7 @@ feature "Display recipes", :type => :feature do
 
   scenario "See recipes" do
     visit '/categories'
-    save_and_open_page
 
-    expect(page).to have_content("Testrezept")
+    expect(page).to have_content("Recipe1")
   end
 end

@@ -1,0 +1,10 @@
+<% recipes.each do |recipe| %>
+  <li class="ui-widget-content ui-corner-tr recipe-<%= recipe.id %>" id="<%= recipe.id %>">
+    <h5 class="ui-widget-header"><%= recipe.name %></h5>
+    <% if recipe.picture? %>
+       <%= image_tag recipe.picture_url(:big_thumb), :class => "big_thumb" %>
+    <% else %>
+       <%= image_tag "no_picture_big.png", :class => "big_thumb" %>
+    <% end %>
+  </li>
+<% end %>

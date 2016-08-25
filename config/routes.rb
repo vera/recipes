@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  get 'pages/weekplanner'
+  post 'pages/weekplanner'
+
+  post 'pages/weekplanner/update_results' => 'pages#update_results'
+  post 'pages/weekplanner/update_shopping_list' => 'pages#update_shopping_list'
+
   get 'pages/search'
   post 'pages/search'
 

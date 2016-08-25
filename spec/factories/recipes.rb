@@ -1,6 +1,7 @@
 FactoryGirl.define do
   factory :recipe do
-    name "Testrezept"
+    sequence(:name){|n| "Recipe#{n}" }
     association :category
+    ingredients { [ FactoryGirl.create(:ingredient) ] }
   end
 end
