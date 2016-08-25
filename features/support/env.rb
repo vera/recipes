@@ -6,6 +6,9 @@
 
 require 'cucumber/rails'
 
+require 'capybara/poltergeist'
+Capybara.javascript_driver = :poltergeist
+
 module Cucumber
   module Rails
     class World
@@ -13,8 +16,6 @@ module Cucumber
     end
   end
 end
-
-Capybara.javascript_driver = :selenium
 
 # Capybara defaults to CSS3 selectors rather than XPath.
 # If you'd prefer to use XPath, just uncomment this line and adjust any
