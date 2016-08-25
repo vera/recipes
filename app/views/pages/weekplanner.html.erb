@@ -1,11 +1,13 @@
 <script>
+
+
 $( function() {
   $( "#slider" ).slider({
     range: true,
     step: 5,
     min: <%= @minPreparationTime %>,
     max: <%= @maxPreparationTime %>,
-    values: [ <%= @minPreparationTimeSelected %>, <%= @maxPreparationTimeSelected %> ],
+    values: [ <%= @minPreparationTime %>, <%= @maxPreparationTime %> ],
     slide: function( event, ui ) {
       // When slider is changed
       // Update label
@@ -18,7 +20,7 @@ $( function() {
       $.ajax({
         type: 'post',
         beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
-        url: '/pages/search',
+        url: '/pages/weekplanner/update_results',
         data: data,
         dataType: 'script'
       });
@@ -39,7 +41,7 @@ $( function() {
     $.ajax({
       type: 'post',
       beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
-      url: '/pages/search',
+      url: '/pages/weekplanner/update_results',
       data: data,
       dataType: 'script'
     });
@@ -51,7 +53,7 @@ $( function() {
     $.ajax({
       type: 'post',
       beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
-      url: '/pages/weekplanner',
+      url: '/pages/weekplanner/update_results',
       data: data,
       dataType: 'script'
     });
@@ -63,7 +65,7 @@ $( function() {
     $.ajax({
       type: 'post',
       beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
-      url: '/pages/weekplanner',
+      url: '/pages/weekplanner/update_results',
       data: data,
       dataType: 'script'
     });
@@ -81,7 +83,7 @@ $( function() {
     cancel: "a.ui-icon", // clicking an icon won't initiate dragging
     revert: "invalid", // when not dropped, the item will revert back to its initial position
     containment: "document",
-    helper: "clone",
+    //helper: "clone",
     cursor: "move"
   });
 
@@ -92,41 +94,10 @@ $( function() {
       "ui-droppable-active": "ui-state-highlight"
     },
     drop: function( event, ui ) {
-      deleteImage( ui.draggable, $(this).attr('id') );
+      addRecipe( ui.draggable, $(this) );
     }
   });
 
-  // Image deletion function
-  function deleteImage( $item, $weekday_id ) {
-    $item.fadeOut(function() {
-      $weekday = $( "#"+$weekday_id );
-
-      var $list = $( "ul", $weekday ).length ?
-        $( "ul", $weekday ) :
-        $( "<ul class='weekplan ui-helper-reset'/>" ).appendTo( $weekday );
-
-      $item.find( "a.ui-icon-trash" ).remove();
-      $list.append('<li>'+$item.find( ".ui-widget-header" ).text()+'</li>');
-
-      $( ".shopping_list" ).append( $item.find( ".ingredients" ).html() );
-    });
-  }
-
-  // Resolve the icons behavior with event delegation
-  $( "ul.gallery > li" ).on( "click", function( event ) {
-    var $item = $( this ),
-      $target = $( event.target );
-
-    if ( $target.is( "a.ui-icon-trash" ) ) {
-      deleteImage( $item );
-    } else if ( $target.is( "a.ui-icon-zoomin" ) ) {
-      viewLargerImage( $target );
-    } else if ( $target.is( "a.ui-icon-refresh" ) ) {
-      recycleImage( $item );
-    }
-
-    return false;
-  });
 } );
 </script>
 
@@ -134,6 +105,7 @@ $( function() {
 <div class="row">
   <div class="col-md-4 shopping_list">
     <h2>Shopping list</h2>
+    <%= render partial: 'shared/shopping_list', locals: {ingredients: @shopping_list} %>
   </div>
 
   <div class="col-md-8 ui-widget ui-helper-clearfix">
@@ -164,14 +136,14 @@ $( function() {
         <h4 class="ui-widget-header"><%= @days_strings.at(6) %></h4>
       </div>
     </div>
-    
+
   </div>
 </div>
 
 <div class="row">
   <div class="col-md-4">
     <h2>Filter</h2>
-    <%= form_tag("/pages/weekplanner", remote: true, method: "post", id: "search_form") do %>
+    <%= form_tag("/pages/weekplanner/update_results", remote: true, method: "post", id: "search_form") do %>
 
       <div class="field">
         <%= label_tag :name %><br/>
