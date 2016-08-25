@@ -94,7 +94,7 @@ $( function() {
       "ui-droppable-active": "ui-state-highlight"
     },
     drop: function( event, ui ) {
-      addRecipe( ui.draggable, $(this) );
+      window.addRecipe( ui.draggable, $(this) );
     }
   });
 
