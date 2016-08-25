@@ -37,6 +37,8 @@
 
         <li class="<%= 'active' if params[:controller] == 'pages' && params[:action] == 'search' %>"><a href="/pages/search">Search</a></li>
 
+        <li class="<%= 'active' if params[:controller] == 'pages' && params[:action] == 'weekplanner' %>"><a href="/pages/weekplanner">Week Planner</a></li>
+
         <li class="<%= 'active' if current_page?(pages_info_path) %>"><a href="/pages/info">About</a></li>
       </ul>
     </div>
