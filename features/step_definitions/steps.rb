@@ -21,6 +21,12 @@ def createRecipes(table)
   end
 end
 
+#####################################################
+#                                                   #
+# GIVEN                                             #
+#                                                   #
+#####################################################
+
 Given(/^there is a recipe/) do |table|
   createRecipes(table)
 end
@@ -28,6 +34,12 @@ end
 Given(/^there are these recipes:$/) do |table|
   createRecipes(table)
 end
+
+#####################################################
+#                                                   #
+# WHEN                                              #
+#                                                   #
+#####################################################
 
 When(/^I visit the landing page$/) do
   visit '/'
@@ -66,6 +78,12 @@ When(/^I drop the recipe labeled with "([^"]*)" into the day with number "([^"]*
   page.execute_script("window.addRecipe($('.recipe-#{@recipe.id}'), $('#weekday#{day}'))")
   sleep(1)
 end
+
+#####################################################
+#                                                   #
+# THEN                                              #
+#                                                   #
+#####################################################
 
 Then(/^I see the preparation time$/) do
   tr_element = find("tr", :text => /Preparation time:/)
