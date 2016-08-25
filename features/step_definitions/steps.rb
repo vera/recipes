@@ -1,20 +1,23 @@
 def createRecipes(table)
   table.hashes.each do |row|
-    recipe = create :recipe, {
-      name: row["Name"],
-      preparation_time: row["Preparation time (min)"],
-      servings: row["Number of servings"]
-    }
+
+    ingredients = Array.new
 
     if !row["Ingredients"].blank?
       row["Ingredients"].split(",").each do |ingredient_name|
         ingredient = create :ingredient, {
           name: ingredient_name
         }
-        recipe.ingredients << ingredient
+        ingredients << ingredient
       end
-      recipe.save
     end
+
+    recipe = create :recipe, {
+      name: row["Name"],
+      preparation_time: row["Preparation time (min)"],
+      servings: row["Number of servings"],
+      ingredients: ingredients
+    }
   end
 end
 
@@ -60,9 +63,8 @@ end
 
 When(/^I drop the recipe labeled with "([^"]*)" into the day with number "([^"]*)"$/) do |recipe_name, day|
   @recipe = Recipe.find_by(name: recipe_name)
-  source = page.find(".recipe-#{@recipe.id}")
-  target = page.find("#weekday#{day}")
-  source.drag_to(target)
+  page.execute_script("window.addRecipe($('.recipe-#{@recipe.id}'), $('#weekday#{day}'))")
+  sleep(1)
 end
 
 Then(/^I see the preparation time$/) do
@@ -88,7 +90,6 @@ Then(/^I see the list of ingredients$/) do
 end
 
 Then(/^I see "([^"]*)" in the shopping list$/) do |expectedText|
-  save_and_open_page
   shopping_list = find(".shopping_list")
   expect(shopping_list).to have_text(expectedText)
 end
