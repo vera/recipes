@@ -61,3 +61,10 @@ Recipe.create!([{
   ingredients: Ingredient.where(name: ['Potatoes', 'Spinach']),
   picture: open(Rails.root + "app/assets/images/sample_picture_potatoes.jpg")
 }])
+
+testuser = User.new(
+  email: "testuser@example.com",
+  password: "secret"
+)
+testuser.skip_confirmation!
+testuser.save!
