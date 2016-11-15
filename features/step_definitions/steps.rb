@@ -35,6 +35,27 @@ Given(/^there are these recipes:$/) do |table|
   createRecipes(table)
 end
 
+Given(/^there is the category "([^"]*)"$/) do |name|
+  @category = Category.new(name: name)
+  @category.save!
+end
+
+Given(/^I am logged in$/) do
+  email = 'testuser@example.com'
+  password = 'secret'
+  testuser = User.new(:email => email, :password => password, :password_confirmation => password)
+  testuser.skip_confirmation!
+  testuser.save!
+
+  visit '/users/sign_in'
+  fill_in "user_email", :with => email
+  fill_in "user_password", :with => password
+  click_button "Log in"
+end
+
+Given(/^I am not logged in$/) do
+end
+
 #####################################################
 #                                                   #
 # WHEN                                              #
@@ -42,7 +63,7 @@ end
 #####################################################
 
 When(/^I visit the landing page$/) do
-  visit '/'
+  visit root_path
 end
 
 When(/^I click on the picture labeled with "([^"]*)"$/) do |recipe_name|
@@ -77,6 +98,22 @@ When(/^I drop the recipe labeled with "([^"]*)" into the day with number "([^"]*
   @recipe = Recipe.find_by(name: recipe_name)
   page.execute_script("window.addRecipe($('.recipe-#{@recipe.id}'), $('#weekday#{day}'))")
   sleep(1)
+end
+
+When(/^I press the "([^"]*)" button$/) do |text|
+  page.click_button(text)
+end
+
+When(/^I click the "Add recipe" link of that category$/) do
+  click_on 'add-recipe-'+@category.id.to_s
+end
+
+When(/^I input the recipe:$/) do |table|
+  table.hashes.each do |row|
+    @recipe = row
+    fill_in 'Name', with: @recipe["Name"]
+    fill_in 'Description', with: @recipe["Description"]
+  end
 end
 
 #####################################################
@@ -115,4 +152,17 @@ end
 Then(/^I don't see "([^"]*)" in the shopping list$/) do |notExpectedText|
   shopping_list = find(".shopping_list")
   expect(shopping_list).not_to have_text(notExpectedText)
+end
+
+Then(/^I see the recipe's details$/) do
+  expect(page).to have_text(@recipe["Name"])
+  expect(page).to have_text(@recipe["Description"])
+end
+
+Then(/^the recipe is saved to the database$/) do
+  expect(Recipe.all.count).to equal(1)
+end
+
+Then(/^I don't see the "([^"]*)" link of that category$/) do |arg1|
+  expect(page).not_to have_link('', :href => '/categories/'+@category.id.to_s+'/recipes/new')
 end

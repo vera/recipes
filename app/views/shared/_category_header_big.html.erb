@@ -1,7 +1,9 @@
 <thead>
   <th class="cat_big" colspan="2"><%= link_to category.name, category_recipes_path(category) %></th>
   <th class="cat_big button-s right">
-    <%= link_to new_category_recipe_path(category) do %><span class="glyphicon glyphicon-plus"></span><% end %>
+    <% if user_signed_in? %>
+      <%= link_to new_category_recipe_path(category), title: 'Add recipe', id: ('add-recipe-' + category.id.to_s) do %><span class="glyphicon glyphicon-plus"></span><% end %>
+    <% end %>
     <%= link_to category, method: :delete, data: { confirm: 'Are you sure?' } do %><span class="glyphicon glyphicon-remove"></span><% end %>
   </th>
 </thead>
