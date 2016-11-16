@@ -2,11 +2,13 @@ require "rails_helper"
 require "spec_helper"
 
 feature "Display recipes", :type => :feature do
-  before { create :recipe }
+  let(:recipe) do
+    create :recipe
+  end
 
   scenario "See recipes" do
+    recipe
     visit '/categories'
-
-    expect(page).to have_content("Recipe1")
+    expect(page).to have_content(recipe.name)
   end
 end
