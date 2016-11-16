@@ -10,7 +10,8 @@ class CategoriesController < ApplicationController
   # GET /categories/1
   # GET /categories/1.json
   def show
-    redirect_to root_path, notice: params[:notice]
+    redirect_to root_path, notice: 'Not available yet'
+    #@category = Category.find(params[:id])
   end
 
   # GET /categories/new
