@@ -40,6 +40,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 # For user authorization
 gem 'devise'
+gem 'cancancan'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
