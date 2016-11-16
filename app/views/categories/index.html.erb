@@ -6,7 +6,7 @@
       <%= render partial: 'shared/category_header_big', locals: {category: category} %>
       <%= render partial: 'shared/recipes_tbody_big', locals: {recipes: category.recipes.order('created_at DESC').limit(3)} %>
       <tr>
-        <td colspan="3" class="right"><%= link_to category_recipes_path(category) do %>(See all <%= category.recipes.count %> recipes)<% end %></td>
+        <td colspan="3" class="right"><%= link_to category_path(category) do %>(See all <%= category.recipes.count %> recipes)<% end %></td>
       </tr>
     </table>
   </div>
