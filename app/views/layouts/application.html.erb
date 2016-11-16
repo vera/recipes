@@ -40,6 +40,12 @@
         <li class="<%= 'active' if params[:controller] == 'pages' && params[:action] == 'weekplanner' %>"><a href="/pages/weekplanner">Week Planner</a></li>
 
         <li class="<%= 'active' if current_page?(pages_info_path) %>"><a href="/pages/info">About</a></li>
+
+        <% if user_signed_in? %>
+          <li><%= link_to 'Logout', destroy_user_session_path, method: 'delete' %></li>
+        <% else %>
+          <li><%= link_to 'Login', new_user_session_path %></li>
+        <% end %>
       </ul>
     </div>
   </div>
