@@ -1,6 +1,6 @@
 Feature: User authentication
 
-Scenario: Create new recipe in a category while logged in
+Scenario: Add new recipe to a category while logged in
   Given I am logged in
   And there is the category "Example category"
   When I visit the landing page
@@ -12,7 +12,7 @@ Scenario: Create new recipe in a category while logged in
   Then the recipe is saved to the database
   And I see the recipe's details
 
-Scenario: Create new recipe while not logged in
+Scenario: Add new recipe while not logged in
   Given I am not logged in
   And there is the category "Example category"
   When I visit the landing page
