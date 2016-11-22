@@ -2,7 +2,7 @@ Feature: User authentication
 
 Scenario: Add new recipe to a category while logged in
   Given I am logged in
-  And there is the category "Example category"
+  And there is the category "Lunch"
   When I visit the landing page
   And I click the "Add recipe" link of that category
   And I input the recipe:
@@ -14,6 +14,6 @@ Scenario: Add new recipe to a category while logged in
 
 Scenario: Add new recipe while not logged in
   Given I am not logged in
-  And there is the category "Example category"
+  And there is the category "Lunch"
   When I visit the landing page
   Then I don't see the "Add recipe" link of that category
