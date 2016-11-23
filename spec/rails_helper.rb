@@ -28,9 +28,13 @@ require 'support/request_spec_helpers'
 # If you are not using ActiveRecord, you can remove this line.
 ActiveRecord::Migration.maintain_test_schema!
 
+DatabaseCleaner.strategy = :truncation
+
 RSpec.configure do |config|
   config.include Devise::Test::ControllerHelpers, type: :view
   config.include RequestSpecHelper, type: :request
+  config.include(EmailSpec::Helpers)
+  config.include(EmailSpec::Matchers)
 
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
@@ -40,6 +44,9 @@ RSpec.configure do |config|
   # instead of true.
   config.use_transactional_fixtures = false
 
+  config.before(:each) { DatabaseCleaner.start }
+  config.after(:each) { DatabaseCleaner.clean }
+  config.before(:each) { ActionMailer::Base.deliveries.clear }
 
   # RSpec Rails can automatically mix in different behaviours to your tests
   # based on their file location, for example enabling you to call `get` and

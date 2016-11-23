@@ -54,6 +54,7 @@ group :development, :test do
   gem 'selenium-webdriver'
   gem 'poltergeist'
   gem 'sqlite3'
+  gem 'email_spec'
 end
 
 group :development do
