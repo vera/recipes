@@ -14,6 +14,7 @@ feature 'User authorization', type: :feature do
     user_sign_up('test@email.com', 'top-secret')
     expect(page).to have_content 'A message with a confirmation link has been sent to your email address. Please follow the link to activate your account.'
     # Check if mail is sent -> mailer
+    binding.pry
     # expect(ActionMailer::Base.deliveries.count).to eq 1
   end
 
